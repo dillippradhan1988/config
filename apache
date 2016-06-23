@@ -1,0 +1,82 @@
+Install Apache
+---------------
+sudo apt-get update
+sudo apt-get install apache2
+
+to know ip address
+	curl http://icanhazip.com
+
+Install Apache Module
+	sudo a2enmod rewrite
+	sudo service apache2 restart
+	
+http://your_server_IP_address
+
+
+Install MySQL
+--------------
+sudo apt-get install mysql-server php5-mysql
+
+sudo mysql_install_db
+
+sudo mysql_secure_installation
+
+Stop the MySQL Server
+	sudo /etc/init.d/mysql stop
+
+Start the mysqld configuration
+	sudo mysqld --skip-grant-tables &
+
+Login to MySQL as root
+	mysql -u root mysql
+
+Replace YOURNEWPASSWORD with your new password!
+	UPDATE user SET Password=PASSWORD('YOURNEWPASSWORD') WHERE User='root'; FLUSH PRIVILEGES; exit;
+
+Install PHP
+-----------
+sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+
+
+sudo nano /etc/apache2/mods-enabled/dir.conf
+
+<IfModule mod_dir.c>
+    ##DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+    DirectoryIndex index.php index.cgi index.pl index.xhtml index.htm
+</IfModule>
+
+sudo service apache2 restart
+
+Install PHP Modules
+	sudo php5enmod mcrypt
+	sudo service apache2 restart 
+
+Test PHP
+	sudo nano /var/www/html/info.php
+	<?php
+		phpinfo();
+	?>
+	http://127.0.0.1/info.php
+
+
+Install phpMyAdmin
+------------------
+apt-get -y install phpmyadmin
+
+sudo nano /etc/apache2/apache2.conf
+
+# phpMyAdmin Configuration
+Include /etc/phpmyadmin/apache.conf
+
+service apache2 restart
+
+http://127.0.0.1/phpmyadmin
+
+Increase Import File size
+	sudo nano /etc/php5/apache2/php.ini
+
+	post_max_size >= upload_max_filesize
+
+	post_max_size
+
+	upload_max_filesize

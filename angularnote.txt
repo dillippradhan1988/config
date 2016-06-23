@@ -1,0 +1,218 @@
+The angular global object
+-------------------------
+The angular global object contains a set of methods that you'll use to create and
+launch your application. It's also worth noticing that the angular object wraps
+a leaner subset of jQuery called jqLite, which enables Angular to perform basic
+DOM manipulation. 
+
+Another key feature of the angular object is its static methods,
+which you'll use to create, manipulate, and edit the basic entities of your 
+application including, the creation and retrieval of modules.
+
+
+AngularJS modules
+-------------------
+With AngularJS, everything is encapsulated in modules.your AngularJS application
+will rely on at least one module to operate.
+
+Application modules
+--------------------
+AngularJS modules are created and retrieved using the
+angular.module(name, [requires], [configFn]) method
+	• name: This is a string defining the module name
+	• requires: This is an array of strings defining other modules as dependencies
+	• configFN: This is a function that will run when the module is being registered
+
+	
+Two-way data binding
+--------------------	
+Two-way data binding enables AngularJS applications to always keep
+the model synchronized with the view and vice versa. This means that 
+what the view renders is always the projection of the model.
+
+
+Dependency injection
+--------------------
+angular.module('someModule').controller('SomeController',
+	function($scope) {
+
+	}
+);
+
+//annonated version of above example
+angular.module('someModule').controller('SomeController', ['$scope',
+	function($scope) {
+	}
+]);
+
+In this example, the controller method accepts two arguments: 
+	• the controller's name 
+	• the controller's constructor function
+
+The controller's constructor functionis being injected with 
+an AngularJS object named $scope.
+
+AngularJS knows how to inject the right object here because 
+its injector object can read the function argument's names.
+
+
+AngularJS directives
+--------------------
+AngularJS directives are markers,
+usually attributes or element names, which enable the AngularJS compiler to 
+attach a specified behavior to a DOM element and its children elements.
+
+Basically, directives are the way AngularJS interacts with DOM elements and 
+are what enables the basic operation of an AngularJS application.
+
+directive is usually placed on an element as an attribute or defined as the 
+element name.
+
+• ng-app: Itis placed on the DOM element (usually the page's body or html tag) 
+you want Angular to use as the root application element
+• ng-controller: This tells the compiler which controller class to use to
+manage this element view
+• ng-model: This is placed on input elements and binds the input value to a
+property on the model
+• ng-show/ng-hide: This shows and hides an element according to a
+Boolean expression
+• ng-repeat: This iterates over a collection and duplicates the element for
+each item
+
+
+Bootstrapping an AngularJS application
+---------------------------------------
+Automatic bootstrap 
+	<body ng-app="example">
+	</body>
+	<script>
+		angular.module('example', []);
+	</script>
+	
+Manual bootstrap
+	To manually bootstrap an application, you will need to use the 
+	angular.bootstrap(element, [modules], [config]) method, which 
+	accepts	three arguments:
+	
+	Usually, we'll call this function in when the page is loaded using the 
+	jqLite document-ready event as follows
+
+	angular.element(document).ready(function() {
+		angular.bootstrap(document, [mainApplicationModuleName]);
+	});
+	
+	• element: This is the DOM element where you want to bootstrap your
+	application
+	• modules: This is an array of strings defining the modules you want to attach
+	to the application
+	• config: This an object defining configuration options for the application
+	
+Bower
+	npm install -g bower
+	
+	
+AngularJS controllers and scopes
+--------------------------------
+Controllers are basically constructor functions, which AngularJS uses to create a new
+instance of a controller object.
+
+Their purpose is to augment data model reference objects called scopes. Therefore, the
+AngularJS team rightfully defines a scope as the glue between the view and the controller.
+	
+Using a scope object, the controller can manipulate the model, which automatically 
+propagates these changes to the view and vice versa.
+
+Configuring the URL scheme
+----------------------------
+To mark your application routes as single-page application routes, you will
+need to use a routing scheme called Hashbangs.
+ 
+Hashbangs are implemented by adding an exclamation mark right after the hash sign
+	http://localhost:3000/#!/example.
+	
+AngularJS supports Hashbangs configuration using a module configuration block and 
+the $locationProvider service of AngularJS.
+
+AngularJS application routes
+-----------------------------
+The ngRoute module packs several key entities to manage your routes. 
+
+We'll begin with the $routeProvider object, which provides several methods to define
+your AngularJS application routing behavior.
+
+	angular.module('example').config(['$routeProvider',
+		function($routeProvider) {
+			$routeProvider
+				.when('/', {
+					templateUrl: 'example/views/example.client.view.html'
+				})
+				.otherwise({
+					redirectTo: '/'
+				});
+		}
+	]);
+	
+Another entity that is packed in the ngRoute module is the ng-view directive. 
+
+The ng-view directive tells the AngularJS router which DOM element to use to 
+render the routing views.
+
+	<section ng-view></section>
+
+
+AngularJS services
+---------------------
+AngularJS services are singleton entities that are usually used to share information
+between different entities of the same AngularJS application. 
+
+Services can be used to fetch data from your server, share cached data, and inject 
+global objects into other AngularJS components. Since there is a single instance of 
+each service, it is also possible to use two-way data binding between different
+unrelated entities of your AngularJS application.
+	
+	• AngularJS prebundled services 
+	• custom services
+	
+	AngularJS prebundled services 
+		• $http: This is an AngularJS service used to handle AJAX requests
+		• $resource: This is an AngularJS service used to handle RESTful APIs
+		• $location: This is an AngularJS service used to handle URL manipulations
+		• $q: This is an AngularJS service used to handle promises
+		• $rootScope: This is an AngularJS service that returns the root scope object
+		• $window: This is an AngularJS service that returns the browser window object
+	
+	Custom Services
+		services can be done using one of three module methods:
+			provider()
+			service()
+			factory()
+		Each of these methods allows you to define a service name 
+		and service function that serve different purposes
+		
+		• provider(): This is the most verbose method, which provides the most
+		comprehensive way to define a service.
+		
+		• service(): This is used to instantiate a new singleton object from the service
+		function. You should use it when you're defining a service as a prototype.
+		
+		• factory(): This is used to provide the value returning from the invoked
+		service function. You should use it when you want to share objects and
+		data across your application.
+		
+	angular.module('example').factory('ExampleService', [
+		function() {
+			this.someValue = true;
+			this.firstMethod = function() {
+			}
+			this.secondMethod = function() {
+			}
+		}
+	]);
+	
+	Using AngularJS services 
+		angular.module('example').controller('ExampleController', ['$scope', 'ExampleService',
+			function($scope, ExampleService) {
+				$scope.name = 'MEAN Application';
+			}
+		]);
+

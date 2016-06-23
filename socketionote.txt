@@ -1,0 +1,303 @@
+XHR polling
+-------------
+XHR polling, the browser makes periodic requests to the server. The server then returns an empty 
+response unless it has new data to send back. 
+
+Upon a new event, the server will return the new event data to the next polling request.
+
+Demerits
+	This method generates a large number of requests that hit the server with no particular reason,
+	since a lot of requests are returning empty.
+
+	the update time dependson the request period that is on next request.
+
+
+
+XHR long polling
+----------------
+In XHR long polling, the browser makes an XHR request to the server, but a response is not sent back
+unless the server has a new data.
+
+Upon an event, the server responds with the event data and the browser makes a new long polling
+request.
+
+Furthermore, the server can update the browser immediately with new information, without having to wait
+for the browser's next request.
+
+implemented in various ways, including Forever iFrame, multipart XHR, JSONP long polling using script
+tags (for cross-domain, real-time support), and the common long-living XHR.
+
+Demerits
+	However, all these approaches were actually hacks using the HTTP and XHR protocols in a way they were not
+	meant to be used
+
+
+
+the full duplex WebSockets
+--------------------------
+In browsers that support the WebSockets protocol, the initial connection between the server and browser is made 
+over HTTP and is called an HTTP handshake.
+
+Once the initial connection is made, the browser and server open a single ongoing communication channel over a 
+TCP socket.
+
+Once the socket connection is established, it enables bidirectional communication between the browser and server.
+
+This also helps to lower server load, decrease message latency, and unify PUSH communication using a standalone 
+connection.
+
+Demerits
+	First and foremost is browser compatibility.
+
+	The second problem is HTTP proxies, firewalls, and hosting providers Since WebSockets use a different 
+	communication protocol than HTTP, a lot of these intermediaries don't support it yet and block any socket 
+	communication.
+
+
+Socket.io
+---------
+Socket.io has two different modules
+	 Engine.io 
+	 Socket.io
+
+ The idea behind Engine.io was to create a more stable real-time module, which first opens a long-polling XHR 
+ communication and then tries to upgrade the connection to a WebSockets channel.
+
+ The new version of Socket.io uses the Engine.io module and provides the developer with various features such as 
+ events, rooms, and automatic connection recovery
+
+ Socket.io module, it provides you with two objects
+	a socket server object that is responsible for the server functionality 
+	a socket client object that handles the browser's functionality.
+
+Socket.io server object
+	var io = require('socket.io')();
+	io.on('connection', function(socket){ 
+		/* ... */ 
+	});
+	io.listen(3000);
+
+	var app 	= 	require('express')();
+	var server 	= 	require('http').Server(app);
+	var io 		= 	require('socket.io')(server);
+	io.on('connection', function(socket){
+	 	/* ... */ 
+	 });
+	server.listen(3000);
+
+	A client trying to establish a connection with the Socket.io server will start by initiating the handshaking 
+	process.
+
+	Socket.io handshaking
+		When a client wants to connect the Socket.io server, it will first send a handshake HTTP request. The server 
+		will then analyze the request to gather the necessary information for ongoing communication. 
+
+		It will then look for configuration middleware that is registered with the server and execute it before firing
+		the connection event. 
+
+		When the client is successfully connected to the server, the connection event listener is executed, exposing a
+		new socket instance.
+
+		Once the handshaking process is over, the client is connected to the server and all communication with it is 
+		handled through the socket instance object.
+
+		io.on('connection', function(socket){
+			socket.on('disconnect', function() {
+				console.log('user has disconnected');
+			});
+		});
+
+	Socket.io configuration middleware
+		It allows you to manipulate socket communication before the handshake actually occurs.
+
+		io.use(function(socket, next) {
+			next(null, true);
+		});
+
+Socket.io client object
+	The Socket.io client object is responsible for the implementation of the browser socket communication with the 
+	Socket.io server.
+
+	You start by including the Socket.io client JavaScript file, which is served by the Socket.io server.
+
+	The Socket.io JavaScript file exposes an io() method that connects to the Socket.io server and creates the
+	client socket object.
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io();
+			socket.on('connect', function() {
+				
+			});
+		</script>
+
+
+Socket.io events
+	To handle the communication between the client and the server, Socket.io uses a structure that mimics the WebSockets protocol and fires events messages across the server and client objects.
+
+	There are two types of events: system events, which indicate the socket connection status, and custom events, which you'll use to implement your business logic.
+
+	The system events on the socket server are as follows:
+		•	 io.on('connection', ...) : This is emitted when a new socket
+		is connected
+		•	 socket.on('message', ...) : This is emitted when a message is sent
+		using the socket.send() method
+		•	 socket.on('disconnect', ...) : This is emitted when the socket is
+		disconnected
+
+	The system events on the client are as follows:
+		•	 socket.io.on('open', ...) : This is emitted when the socket client opens
+		a connection with the server
+		•	 socket.io.on('connect', ...) : This is emitted when the socket client is
+		connected to the server
+		•	 socket.io.on('connect_timeout', ...) : This is emitted when the socket
+		client connection with the server is timed out
+		•	 socket.io.on('connect_error', ...) : This is emitted when the socket
+		client fails to connect with the server
+		•	 socket.io.on('reconnect_attempt', ...) : This is emitted when the
+		socket client tries to reconnect with the server
+		•	 socket.io.on('reconnect', ...) : This is emitted when the socket client
+		is reconnected to the server
+		•	 socket.io.on('reconnect_error', ...) : This is emitted when the socket
+		client fails to reconnect with the server
+		•	 socket.io.on('reconnect_failed', ...) : This is emitted when the
+		socket client fails to reconnect with the server
+		•	 socket.io.on('close', ...) : This is emitted when the socket client closes
+		the connection with the server
+
+
+Handling events
+	In order to do so, Socket.io exposes two methods, both on the client and server objects.
+
+		The first method is the on() method, which binds event handlers with events 
+
+			io.on('connection', function(socket){
+				socket.on('customEvent', function(customEventData) {
+					
+				});
+			});
+			This time the event handler is being called when the socket client emits the
+			customEvent event that sends customEventData to the socket server event handler.
+
+			<script>
+				var socket = io();
+				socket.on('customEvent', function(customEventData) {
+					
+				});
+			</script>
+			This time the event handler is being called when the socket server emits the
+			customEvent event that sends customEventData to the socket client event handler.
+
+		the second method is the emit() method, which is used to fire events between the server 
+		and client objects.
+
+			Emitting events
+				On the socket server, the emit() method is used to send events to a single socket
+				client or a group of connected socket clients. 
+
+					io.on('connection', function(socket){
+						socket.emit('customEvent', customEventData);
+					});
+
+				The emit() method can be called	from the connected socket object
+
+					io.on('connection', function(socket){
+						io.emit('customEvent', customEventData);
+					});
+
+				Another option is to send the event to all connected socket clients except from the
+				sender using the broadcast property,
+
+					io.on('connection', function(socket){
+						socket.broadcast.emit('customEvent', customEventData);
+					});
+
+				<script>
+					var socket = io();
+					socket.emit('customEvent', customEventData);
+				</script>
+
+				Although these methods allow you to switch between personal and global events,
+				they still lack the ability to send events to a group of connected socket clients. 
+
+				Socket.io offers two options to group sockets together
+					namespaces 
+					rooms
+
+					Socket.io namespaces
+						Socket.io allow developers to split	socket connections according to their purpose 
+						using namespaces. So instead of	creating different socket servers for different 
+						connections, you can just use the same server to create different connection endpoints
+
+						Socket.io server namespaces
+							To create a socket server namespace, you will need to use the socket server of()
+							method that returns a socket namespace.
+
+							io.of('/someNamespace').on('connection', function(socket){
+								socket.on('customEvent', function(customEventData) {
+								
+								});
+							});
+							io.of('/someOtherNamespace').on('connection', function(socket){
+								socket.on('customEvent', function(customEventData) {
+								
+								});
+							});
+
+						Socket.io client namespaces
+							<script>
+								var someSocket = io('/someNamespace');
+								someSocket.on('customEvent', function(customEventData) {
+									
+								});
+
+								var someOtherSocket = io('/someOtherNamespace');
+								someOtherSocket.on('customEvent', function(customEventData) {
+									
+								});
+							</script>
+
+						However, once sockets are connected to different namespaces, you
+						will not be able to send an event to all these namespaces at once. 
+
+						This means that	namespaces are not very good for a more dynamic grouping
+						logic. For this purpose,
+
+						Socket.io offers a different feature called rooms.
+
+					Socket.io rooms
+						Socket.io rooms allow you to partition connected sockets into different groups in a
+						dynamic way. Connected sockets can join and leave rooms, and Socket.io provides
+						you with a clean interface to manage rooms and emit events to the subset of sockets
+						in a room. The rooms functionality is handled solely on the socket server but can
+						easily be exposed to the socket client.
+
+						Joining and leaving rooms
+							Joining a room is handled using the socket join() method
+							while leaving a room is handled using the leave() method
+
+							io.on('connection', function(socket) {
+								socket.on('join', function(roomData) {
+									socket.join(roomData.roomName);
+								})
+
+								socket.on('leave', function(roomData) {
+									socket.leave(roomData.roomName);
+								})
+							});
+
+							join() and leave() methods both take the room name as the first argument.
+
+						Emitting events to rooms
+							To emit events to all the sockets in a room, you will need to use the in() method.
+
+								io.on('connection', function(socket){
+									io.in('someRoom').emit('customEvent', customEventData);
+								});
+
+							Another option is to send the event to all connected socket clients in a room except
+							the sender by using the broadcast property and the to() method:
+
+								io.on('connection', function(socket){
+									socket.broadcast.to('someRoom').emit('customEvent',customEventData);
+								});

@@ -1,0 +1,731 @@
+In a Windows environment, this can be done by executing the following
+command in your command prompt:
+> set NODE_ENV=development
+While in a Unix-based environment, you should simply use the following
+export command:
+$ export NODE_ENV=development
+
+curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Rakesh", "lastName":"Nayak","email":"rakesh@gmail.com","username":"rakesh9090","password":"221441"}' http://localhost:3000/users
+
+curl -X PUT -H "Content-Type: application/json" -d '{"lastName":"Pradhan"}' http://mean-dillip9090.c9users.io:8080/users/576287ad1c276ad718486bc9
+
+curl -X DELETE http://mean-dillip9090.c9users.io:8080/users/5762919248209f9f193be5bd
+
+Node.js is server side Javascript environment based on chrome V8 javascript engine. 
+It enables you to write your server code in javascript, instead of choosing one 
+of the "traditional" web languages such as PHP, c#, python, ruby, perl etc.
+Using node.js and database such as mongodb you could write your web application 
+completely in javascript.
+
+Here's example of the full stack for web development:
+
+1.Backbone for client side, code that runs in the browser (chrome,firefox)
+2.Express server side framework running on Node.js
+3.Mongodb database for storing documents
+
+Above mentioned technologies will enable you create your application writing only javascript code,
+from browser to server and finally to database, sort of one language to rule them, 
+no need for PHP unless you have legacy codebase .
+
+
+
+down vote
+accepted
+Edited:
+
+There are 2 main advantages:
+
+Speed! (Performance)
+Node.js is event-driven and non-blocking and very good at handling concurrent requests.
+
+
+From all the homework I have been doing in the last few days, I obtained the following information. Node.js
+
+is a command-line tool that can be run as a regular web server and lets one run JavaScript programs
+utilizes the great V8 JavaScript engine
+is very good when you need to do several things at the same time
+is event-based so all the wonderful Ajax-like stuff can be done on the server side
+lets us share code between the browser and the backend
+lets us talk with MySQL
+
+
+1135
+
+to set & get port no 
+	app.set(port, process.env.PORT || 3000)
+	app.get('port')
+
+nodejs			express
+------          -------
+res.end			res.send
+res.writeHead	res.set
+
+"use" is the method by which Express addsmiddleware.
+
+Express can distinguish between the 404 and 500 handlers by the number of arguments
+their callback functions take
+
+middleware provides modularization, making it easier to handle requests.
+
+The
+caret (^) in front of the package versions indicates that any version that starts with the
+specified version number—up to the next major version number—will work
+
+"run npm install" to reinstall all modules that is added in package.json
+
+Node modules, as the name implies, offer a mechanism for modularization and
+encapsulation. npm packages provide a standardized scheme for storing, versioning,
+and referencing projects (which are not restricted to modules)
+
+if you want something to be visible outside of the module, you have to add it to exports .
+This is a good thing: encapsulation allows for less error-prone and fragile code.
+var fortune = require('./lib/fortune.js');
+"./" signals to Node that it should not
+
+
+
+http://localhost:3000/about?test=1#history
+	http:// 		=>	protocol
+	localhost		=>	host
+	:3000			=>	port
+	/about			=>	path
+	?test=1			=>	querystring
+	#history		=>	fragment
+
+Protocol
+	The protocol determines how the request will be transmitted. We will be dealing
+	exclusively with http and https. Other common protocols include file and ftp.
+Host
+	The host identifies the server. Servers on your computer (localhost) or a local net‐
+	work may simply be one word, or it may be a numeric IP address. On the Internet,
+	the host will end in a top-level domain (TLD) like .com or .net. Additionally, there
+	may be subdomains, which prefix the hostname. www is a very common subdo‐
+	main, though it can be anything. Subdomains are optional.
+Port
+	Each server has a collection of numbered ports. Some port numbers are “special,”
+	like 80 and 443. If you omit the port, port 80 is assumed for HTTP and 443 for
+	HTTPS. In general, if you aren’t using port 80 or 443, you should use a port number
+	greater than 1023. 1 It’s very common to use easy-to-remember port numbers like
+	3000, 8080, and 8088.
+Path
+	The path is generally the first part of the URL that your app cares about (it is possible
+	to make decisions based on protocol, host, and port, but it’s not good practice). The
+	path should be used to uniquely identify pages or other resources in your app.
+Querystring
+	The querystring is an optional collection of name/value pairs. The querystring
+	starts with a question mark (?), and name/value pairs are separated by ampersands
+	(&). Both names and values should be URL encoded. JavaScript provides a built-in
+	function to do that: encodeURIComponent . For example, spaces will be replaced with
+	plus signs (+). Other special characters will be replaced with numeric character
+	references.
+Fragment
+	The fragment (or hash) is not passed to the server at all: it is strictly for use by the
+	browser. It is becoming increasingly common for single-page applications or AJAX-
+	heavy applications to use the fragment to control the application. Originally, the
+	fragment’s sole purpose was to cause the browser to display a specific part of the
+	document, marked by an anchor tag ( <a id="chapter06"> )
+Ports 0-1023 are “well-known ports.”
+
+Disabling Express’s default X-Powered-By header is easy:
+	app.disable('x-powered-by');
+The format of the Content-Type header is
+an Internet media type, which consists of a type, subtype, and optional parameters. For
+example, text/html; charset=UTF-8 specifies a type of “text,” a subtype of “html,” and
+a character encoding of UTF-8
+
+The most common media type for POST bodies is
+application/x-www-form-urlencoded , which is simply encoded name/value pairs
+multipart/form-data     file upload
+application/json		ajax request
+separated by ampersands
+
+The Request Object
+----------------------------------------
+The request object (which is normally passed to a callback, meaning you can name it
+whatever you want: it is common to name it req or request ) starts its life as an instance
+of http.IncomingMessage , a core Node object.
+req.headers and req.url node method
+	req.params
+	req.query
+	req.body
+	req.route
+	req.cookies / req.signedCookies
+	req.headers
+	req.accepts([types])
+	req.ip
+	req.path
+	req.host
+	req.xhr
+	req.protocol
+	req.secure	
+	req.url / req.originalUrl
+	req.acceptedLanguages
+
+The Response Object
+-----------------------------------------
+The response object (which is normally passed to a callback, meaning you can name it
+whatever you want: it is common to name it res , resp , or response ) starts its life as an
+instance of http.ServerResponse , a core Node object
+	res.status(code)
+	res.set(name, value)
+	res.cookie(name, value, [options]) , res.clearCookie(name, [options])
+	res.redirect([status], url)
+	res.send(body) , res.send(status, body)
+	res.json(json) , res.json(status, json)
+	res.jsonp(json) , res.jsonp(status, json)
+	res.type(type)
+	res.format(object)
+	res.attachment([filename]) , res.download(path, [filename], [callback])
+	res.sendFile(path, [options], [callback])
+	res.links(links)
+	res.locals , res.render(view, [locals], callback)
+
+Express source
+-----------------------------------------------
+lib/application.js
+	The main Express interface. If you want to understand how middleware is linked
+	in, or how views are rendered, this is the place to look.
+lib/express.js
+	This is a relatively short shell that extends Connect with the functionality in lib/
+	application.js, and returns a function that can be used with http.createServer to
+	actually run an Express app.
+lib/request.js
+	Extends Node’s http.IncomingMessage object to provide a robust request object.
+	For information about all the request object properties and methods, this is where
+	to look.
+lib/response.js
+	Extends Node’s http.ServerResponse object to provide the response object. For
+	information about response object properties and methods, this is where to look.
+lib/router/route.js
+	Provides basic routing support. While routing is central to your app, this file is less
+	than 200 lines long; you’ll find that it’s quite simple and elegant.
+
+app.set('view cache', true);
+require('express3-handlebars').create({ extname: '.hbs' })
+{{> partial_name}} //including parial in view
+
+Default form submission encoding
+	application/x-www-form-urlencoded
+
+It’s very important that you use a 303 (or 302) redirect, not a 301
+redirect in this instance. 301 redirects are “permanent,” meaning your
+browser may cache the redirection destination. If you use a 301 redi‐
+rect and try to submit the form a second time, your browser may
+bypass the /process handler altogether and go directly to /thank-
+you since it correctly believes the redirect to be permanent. The 303
+redirect, on the other hand, tells your browser “Yes, your request is
+valid, and you can find your response here,” and does not cache the
+redirect destination.
+
+cookie
+	The idea of a cookie is simple: the server sends a bit of information, and the browser
+	stores it for some configurable period of time. It’s really up to the server what the par‐
+	ticular bit of information is: often it’s just a unique ID number that identifies a specific
+	browser so that the illusion of state can be maintained.
+
+	A category of attacks called cross-site scripting attacks (XSS) has sprung up in recent
+	years. One technique of XSS attacks involves malicious JavaScript modifying the
+	contents of cookies
+
+	Cookies are not magic: when the server wishes the client to store a
+	cookie, it sends a header called Set-Cookie containing name/value
+	pairs, and when a client sends a request to a server for which it has
+	cookies, it sends multiple Cookie request headers containing the val‐
+	ue of the cookies.
+
+	res.cookie('monster', 'nom nom');
+	res.cookie('signed_monster', 'nom nom', { signed: true });
+
+	var monster = req.cookies.monster;
+	var signedMonster = req.signedCookies.monster;
+
+	To delete a cookie, use req.clearCookie :
+	res.clearCookie('monster');
+session
+	Broadly speaking, there are two ways to implement sessions: store everything in the
+	cookie,called “cookie-based sessions.”cookie-session middleware
+
+	or store only a unique identifier in the cookie and everything else on the serv‐
+	er. 
+
+	The express-session middleware accepts a configuration object with the following
+	options:
+	key
+	The name of the cookie that will store the unique session identifier. Defaults to
+	connect.sid .
+	store
+	An instance of a session store. Defaults to an instance of MemoryStore , which is fine
+	for our current purposes. We’ll see how to use a database store in Chapter 13.
+	cookie
+	Cookie settings for the session cookie ( path , domain , secure , etc.). Regular cookie
+	defaults apply.
+
+	req.session.userName = 'Anonymous';
+var colorScheme = req.session.colorScheme || 'dark';
+
+	req.session.userName = null; // this sets 'userName' to null,
+	// but doesn't remove it
+	delete req.session.colorScheme; // this removes 'colorScheme'
+
+middleware
+	Conceptually, middleware is a way to encapsulate functionality: specifically, function‐
+	ality that operates on an HTTP request to your application. Practically, a middleware is
+	simply a function that takes three arguments: a request object, a response object, and a
+	“next” function, which will be explained shortly. (There is also a form that takes four
+	arguments, for error handling, which will be covered at the end of this chapter.)
+
+	In an Express app, you insert middleware into the pipeline by
+	calling app.use .
+
+	. If there are two or three parameters, the first two
+	parameters are the request and response objects, and the third paramater is the
+	next function. If there are four parameters, it becomes an error-handling middle‐
+	ware, and the first parameter becomes an error object, followed by the request,
+	response, and next objects.
+
+	• If you don’t call next() , the pipeline will be terminated, and no more route handlers
+	or middleware will be processed. If you don’t call next() , you should send a re‐
+	sponse to the client ( res.send , res.json , res.render , etc.); if you don’t, the client
+	will hang and eventually time out.
+
+	• If you do call next() , it’s generally inadvisable to send a response to the client. If
+	you do, middleware or route handlers further down the pipeline will be executed,
+	but any client responses they send will be ignored.	
+
+	In the previous example, we have a middleware aborting early with
+	the statement return next() . Express doesn’t expect middleware to
+	return a value (and it doesn’t do anything with any return values), so
+	this is just a shortened way of writing next(); return; .
+
+Mial
+	SMTP, MSAs, and MTAs
+		The lingua franca for sending email is the Simple Mail Transfer Protocol (SMTP). While
+		it is possible to use SMTP to send an email directly to the recipient’s mail server, this is
+		generally a very bad idea: unless you are a “trusted sender” like Google or Yahoo!,
+		chances are your email will be be tossed directly into the spam bin. 
+		
+		Better to use a Mail Submission Agent (MSA), which will deliver the email through
+		trusted channels, reducing the chance that your email will be marked as spam.
+		In addition to ensuring that your email arrives, MSAs handle nuisances like 
+		temporary outages and bounced emails.
+		
+		The final piece of the equation is the Mail Transfer Agent (MTA), which is the service
+		that actually sends the email to its final destination
+	Receiving Email
+		Unfortunately, receiving email is much more involved and will not be covered in this
+		book. If this is functionality you need, you should look into Andris Reinman’s SimpleSMTP
+		or Haraka.
+		https://github.com/andris9/simplesmtp
+		http://haraka.github.io/
+	Email Headers
+		An email message consists of two parts: the header and the body (very much like an
+		HTTP request). The header contains information about the email: who it’s from, who
+		it’s addressed to, the date it was received, the subject, and more.
+		
+		The headers give you all the information about how the
+		email got to you; every server and MTA that the email passed through will be listed in
+		the header.
+		
+		When you specify a “from” address other than the account
+		from which you’re sending, it’s often referred to as “spoofing.”
+	Email Formats
+		email can either be plaintext (Unicode) or HTML.
+		
+		http://kb.mailchimp.com/campaigns/ways-to-build/about-html-email
+	
+	Syntax:
+		var mailTransporter = nodemailer.createTransport(options[, defaults]);
+	
+	//node mailer package
+		var nodemailer 		= 	require('nodemailer');
+	
+	//3 type SMTP config setting (options)
+		var smtpConfig = {
+		    host: 'smtp.gmail.com',
+		    port: 465,
+		    secure: true, // use SSL
+		    auth: {
+		        user: 'user@gmail.com',
+		        pass: 'pass'
+		    }
+		};
+		
+		var poolConfig = {
+		    pool: true,
+		    host: 'smtp.gmail.com',
+		    port: 465,
+		    secure: true, // use SSL
+		    auth: {
+		        user: 'user@gmail.com',
+		        pass: 'pass'
+		    }
+		};
+		
+		var directConfig = {
+		    name: 'hostname' // must be the same that can be reverse resolved by DNS for your IP
+		};
+	
+	Alternatively you could use connection url. Use smtp:, smtps: or direct: as the protocol.
+
+		var smtpConfig = 'smtps://user%40gmail.com:pass@smtp.gmail.com';
+		var poolConfig = 'smtps://user%40gmail.com:pass@smtp.gmail.com/?pool=true';
+		var directConfig = 'direct:?name=hostname';
+	
+	
+	
+	Example
+		//using Mail Submission Agent (MSA) like Gmail
+		var smtpConfig 		= 	{
+			    host: 'smtp.gmail.com',
+			    port: 465,
+			    secure: true, // use SSL
+			    auth: {
+			        user: credentials.gmail.user,
+			        pass: credentials.gmail.password
+			    }
+		};
+		
+		var mailTransporter = 	nodemailer.createTransport(smtpConfig);
+		
+		app.get('/sendmail',function(req,res){
+			// setup e-mail data with unicode symbols
+			var mailOptions = {
+			    from: '"Fred Foo ??" <foo@blurdybloop.com>', // sender address
+			    to: 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
+			    subject: 'Hello ?', // Subject line
+			    text: 'Hello world ??', // plaintext body
+			    html: '<b>Hello world ??</b>' // html body
+			};
+			
+			// send mail with defined transport object
+			mailTransporter.sendMail(mailOptions, function(error, info){
+			    if(error){
+			        return console.log(error);
+			    }
+			    console.log('Message sent: ' + info.response);
+			    res.send('Mail sent successfully.');
+			});
+		});
+		
+		The difference between an attachment and an alternative is the fact that attachments are placed into multipart/mixed or multipart/related parts of the message 
+		white alternatives are placed into multipart/alternative part.
+		
+Execution Environments		
+		Express supports the concept of execution environments: a way to run your application
+		in production, development, or test mode or stage mode or preview mode.
+		
+Scaling Your Website
+	These days, scaling usually means one of two things: scaling up or scaling out. Scaling
+	up refers to making servers more powerful: faster CPUs, better architecture, more cores,
+	more memory, etc. Scaling out, on the other hand, simply means more servers. With
+	the increased poularity of cloud computing and the ubiquity of virtualization, server
+	
+Environment-Specific Configuration	
+	NODE_ENV=development node server.js
+	NODE_ENV=production node server.js
+	NODE_ENV=test node server.js
+	NODE_ENV=stage node server.js
+	NODE_ENV=preview node server.js
+	
+Scaling Out with App Clusters
+	Node itself supports app clusters, a simple, single-server form of scaling out. With app
+	clusters, you can create an independent server for each core (CPU) on the system (having
+	more servers than the number of cores will not improve the performance of your
+	app). App clusters are good for two reasons: first, they can help maximize the performance
+	of a given server (the hardware, or virtual machine), and second, it’s a lowoverhead
+	way to test your app under parallel conditions.
+	
+Scaling Out with Single Servers
+	use cluster
+Scaling Out with Multiple Servers
+	use proxy server or reverse proxy or forward-facing proxy
+
+If you do configure a proxy server, make sure you tell Express that you are using a proxy
+and that it should be trusted
+	app.enable('trust proxy');
+
+Third-Party Uptime Monitors
+	Pingdom and Site24x7.
+
+Filesystem Persistence
+	Filesystem persistence has some drawbacks. In particular, it doesn’t scale well: the mi‐
+	nute you need more than one server to meet traffic demands, you will run into problems
+	with filesystem persistence, unless all of your servers have access to a shared filesystem.
+	Also, because flat files have no inherent structure, the burden of locating, sorting, and
+	filtering data will be on your application. For these reasons, you should favor databases
+	over filesystems for storing data. The one exception is storing binary files, such as im‐
+	ages, audio files, or videos. While many databases can handle this type of data, they
+	rarely do so more efficiently than a filesystem (though information about the binary
+	files is usually stored in a database to enable searching, sorting, and filtering).
+
+nodemongoprejdb
+
+
+
+Middleware
+-----------------------------------------------------------------------
+A.Working with Middleware
+	defination
+		middleware is a function with three arguments
+			1.request (req)
+			2.response (res) 
+			3.next
+	purpose
+		1.reuse code within their applications
+		2.share it with others in the form of NPM modules
+	syntax
+		var myMiddleware = function (req, res, next) {
+			// Do something with req and/or res
+			next();
+		};
+
+
+B.Applying Middleware
+	app.use() method from the Express.js API
+	The method app.use() has one optional string parameter path and 
+	one mandatory function parameter callback
+
+	var myMiddleware = function (req, res, next) {
+		// Do something with req and/or res
+		next();
+	};
+
+	app.use('/admin',function (req, res, next) {
+		// Do something with req and/or res
+		next();
+	});
+	app.use(function (req, res, next) {
+		// Do something with req and/or res
+		next();
+	});		
+	or
+	app.use('/admin',myMiddleware);
+	app.use(myMiddleware);
+
+	Static middleware's NPM module is serve-static.
+
+
+C.Essential Middleware
+	npm install compression@1.0.11 --save
+		var compression = require('compression');
+		// ... Typical Express.js set up...
+		app.use(compression()); //1 optional param
+
+	npm install morgan@1.2.2 --save
+		var logger = require('morgan');
+		// ... Configurations
+		app.use(logger('common'));//Morgan takes either an options object or a format string(common,dev)
+
+	npm install body-parser@1.6.1
+		body-parser module has the following distinct middleware
+		1.json(): Processes JSON data; e.g., {"name": "value", "name2":
+		"value"}
+		2.urlencoded(): Processes URL-encoded data; e.g.,
+		name=value&name2=value2
+
+	npm install cookie-parser@1.3.2
+		var cookieParser = require('cookie-parser');
+		// ... Some Express.js set up
+		app.use(cookieParser('random string',path));//optional
+		or
+		app.use(cookieParser('cats and dogs can learn JavaScript')); //or a random string
+
+	npm install express-session@1.7.6 --save
+		key: Cookie name, defaulting to connect.sid
+		store: Session store instance, usually a Redis object 
+		secret: Used to sign the session cookie, to prevent tampering
+		others
+
+	npm install csurf@1.6.0 --save
+		var csrf = require('csurf');
+		// ... Instantiate Express.js application
+		app.use(csrf());
+
+
+Routing
+------------------------------------------------------------------------------------------
+A.To review, the typical structure of an Express.js app (which is usually a server.js or
+  app.js file) roughly consists of these parts, in the order shown:
+
+	1.Dependencies: A set of statements to import dependencies
+
+	2.Instantiations: A set of statements to create objects
+
+	3.Configurations: A set of statements to configure system and 
+	  custom settings
+
+	4.Middleware: A set of statements that is executed for every
+	  incoming request
+
+	5.Routes: A set of statements that defines server routes,
+	  endpoints, and pages
+
+	6.Bootup: A set of statements that starts the server and makes it
+	  listen on a specific port for incoming requests
+	
+B.The following are the most commonly used Representational State Transfer (REST)
+  server architecture HTTP methods and their counterpart methods in Express.js along
+  with the brief meaning:
+
+	1.GET: app.get()—Retrieves an entity or a list of entities
+
+	2.HEAD: app.head()—Same as GET, only without the body
+
+	3.POST: app.post()—Submits a new entity
+
+	4.PUT: app.put()—Updates an entity by complete replacement
+
+	5.PATCH: app.patch()—Updates an entity partially
+
+	6.DELETE: app.delete() and app.del()—Deletes an
+	  existing entity
+
+	7.OPTIONS: app.options()—Retrieves the capabilities of
+	  the server
+
+
+
+C.This is useful for abstracting certain modules based on the business logic that they
+  perform. For example, all /users/* routes can be defined in one router, and all /posts/*
+  routes can be defined in another.
+
+	var express = require('express');
+	var router = express.Router(options);//
+	// ... Define routes
+	app.use('/blog', router);
+
+	where options is an object that can have following properties:
+		1.caseSensitive: Boolean indicating whether to treat routes with
+		the same name but different letter case as different, false by
+		default; e.g., if it’s set to false, then /Users is the same as /users.
+
+		2.strict: Boolean indicating whether to treat routes with the same
+		name but with or without a trailing slash as different, false by
+		default; e.g., if it’s set to false, then /users is the same as /users/.
+
+
+Request Object
+----------------------------------------------------------------------------------------------
+A.The Express.js request object (req for short) is a wrapper for a core Node.js http.request
+  object which is the Node.js representation of the incoming HTTP(S) request. In web, the
+  request has these parts:
+	1.Method: GET, POST or others
+	2.URI: the location for example http://hackhall.com/api/posts/
+	3.Headers: host: www.hackhall.com
+	4.Body: content in the urlencoded, JSON or other formats
+
+B.list of methods and objects of the Express.js request object that we’ll cover
+  in this chapter:
+	1.request.query: query string parameters
+	2.request.params: URL parameters
+	3.request.body: request body data
+	4.request.route: the route path
+	5.request.cookies: cookie data
+	6.request.signedCookies: signed cookie data
+	7.request.header() and request.get(): request headers
+
+C.Signing a cookie does not hide or encrypt the cookie. It’s a simple way to
+  prevent tampering by applying a private value. Signing (or hashing) is not the same as
+  encryption. The former is for identification and tampering prevention, and the latter is for
+  hiding the content from unauthorized recipients
+
+
+Responce Object
+----------------------------------------------------------------------------------------------
+A.list of methods and objects of the Express.js response object that we’ll cover
+  in this chapter:
+	1.response.render()
+	2.response.locals
+	3.response.set()
+	4.response.status()
+		200: OK
+		201: Created
+		301: Moved Permanently
+		401: Unauthorized
+		404: Not Found
+		500: Internal Server Error
+	5.response.send()
+	6.response.json()
+	7.response.jsonp()
+	8.response.redirect()
+
+REST
+--------------------------------------------------------------------------------------------------
+The acronym REST stands for “representational state transfer,” and the grammatically
+troubling “RESTful” is used as an adjective to describe a web service that satisfies the
+principles of REST.
+
+REST is a stateless connection between a client and a server
+
+REST also specifies that the service can be cached and that services can be layered 
+(that is, when you use a REST API, there may be other REST APIs beneath it).
+
+Errors
+	Catastrophic errors
+		Errors that result in an unstable or unknown state for the server. Usually, this is the
+		result of an unhandled exception. The only safe way to recover from a catastrophic
+		error is to restart the server. Ideally, any pending requests would receive a 500
+		response code, but if the failure is severe enough, the server may not be able to
+		respond at all, and the request will time out.
+
+	Recoverable server errors
+		Recoverable errors do not require a server restart, or any other heroic action. The
+		error is a result of an unexpected error condition on the server (for example, a
+		database connection being unavailable). The problem may be transient or perma‐
+		nent. A 500 response code is appropriate in this situation.
+
+	Client error
+		Client errors are a result of the client making the mistake, usually missing or invalid
+		parameters. It isn’t appropriate to use a 500 response code: after all, the server has
+		not failed. Everything is working normally, the client just isn’t using the API cor‐
+		rectly. You have a couple of options here: you could respond with a status code of
+		200 and describe the error in the response body, or you could additionally try to
+		describe the error with an appropriate HTTP status code. I recommend the latter
+		approach. The most useful response codes in this case are 404 (Not Found), 400
+		(Bad Request), and 401 (Unauthorized). Additionally, the response body should
+		contain an explanation of the specifics of the error. If you want to go above and
+		beyond, the error message would even contain a link to documentation. Note that
+		if the user requests a list of things, and there’s nothing to return, this is not an error
+		condition: it’s appropriate to simply return an empty list.
+
+Cross-Origin Resource Sharing (CORS)
+	same-origin policy, which restricts where scripts can be loaded from. Specifically, 
+	the protocol, domain, and port must match.
+
+	CORS is implemented through the Access-Control-Allow-Origin header.
+	
+	
+Static Resource
+------------------------------------------------------------------------------------------------------
+The two primary performance considerations are 
+
+	1.Reducing the number of requests can be accomplished in two ways: 
+		combining resources (css sprite)
+		browser caching
+		
+	2.reducing content size.
+		a.lossless (size reduction can be achieved without losing any data)
+			ex : minification of JavaScript and CSS, and optimizing PNG images.
+		b.lossy (size reduction is achieved by reducing the quality of static resources)
+			ex : increasing JPEG and video compression levels
+			
+	
+	npm install --save-dev grunt-contrib-less
+	
+	
+HTTP Long Polling
+-------------------------------------------------------------------------------------------------------------
+HTTP long polling, where the client polls the server requesting new information.  The server holds the request open 
+until new data is available. Once available, the server responds and sends the new information. When the client
+receives the new information, it immediately sends another request, and the operation is repeated. 
+
+How to listen for changes to a MongoDB collection
+
+
+You can listen to events like insert, update, and other data events in mongodb using special collection named oplog. You just need to enable replication on your db instance either using mongod --master or mongod --replicaSet.
+
+Oplog is actually a capped collection which is used by mongodb internally to implement replication. If you are using master/slave replication you will find the collection by the name of oplog.$main, if you are using replica sets it will be named oplog.rs.
+
+You can use a tailable cursor on oplog, that should work.
+
+Oplog, in effect, is logs itself. So you might not need to store them separately for logging purpose. However its size is fixed. Meaning when its full, older data gets deleted.
