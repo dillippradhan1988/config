@@ -31,7 +31,7 @@ Login to MySQL as root
 	mysql -u root mysql
 
 Replace YOURNEWPASSWORD with your new password!
-	UPDATE user SET Password=PASSWORD('YOURNEWPASSWORD') WHERE User='root'; FLUSH PRIVILEGES; exit;
+	UPDATE user SET Password=PASSWORD('bzrplnt23$') WHERE User='root'; FLUSH PRIVILEGES; exit;
 
 Install PHP
 -----------
