@@ -661,7 +661,23 @@ cookie
 session
 	PHP Engine creates a logical object to preserve data across subsequent HTTP requests, which is known as session.
 
+Web Service
+-------------
+In programming, in generally refers to a web page, that can be called from an application (be it another web page, or desktop app), and the caller will pass in data to it, or receive data from it
 
+	REST
+	SOAP
+
+REST
+--------------------------------------------------------------------------------------------------
+The acronym REST stands for “representational state transfer,” and the grammatically
+troubling “RESTful” is used as an adjective to describe a web service that satisfies the
+principles of REST.
+
+REST is a stateless connection between a client and a server
+
+REST also specifies that the service can be cached and that services can be layered 
+(that is, when you use a REST API, there may be other REST APIs beneath it).
 
 The following are the most commonly used Representational State Transfer (REST)
   server architecture HTTP methods and their counterpart methods in Express.js along
@@ -682,17 +698,6 @@ The following are the most commonly used Representational State Transfer (REST)
 
 	7.OPTIONS: app.options()—Retrieves the capabilities of
 	  the server
-
-REST
---------------------------------------------------------------------------------------------------
-The acronym REST stands for “representational state transfer,” and the grammatically
-troubling “RESTful” is used as an adjective to describe a web service that satisfies the
-principles of REST.
-
-REST is a stateless connection between a client and a server
-
-REST also specifies that the service can be cached and that services can be layered 
-(that is, when you use a REST API, there may be other REST APIs beneath it).
 
 Cross-Origin Resource Sharing (CORS)
 	same-origin policy, which restricts where scripts can be loaded from. Specifically, 
