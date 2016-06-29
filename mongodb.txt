@@ -45,15 +45,22 @@ Step-9
 Step-10
 	Check this http://localhost:28017/ in browser to know database status
 	
-	
+
+Import from JSON file	
+	./mongoimport --jsonArray --db bazarplanet --collection locations --file /home/dillip/Downloads/location.json
+
+Export To JSON file
+	./mongoexport --db bazarplanet --collection technicaljobs --out /home/dillip/Downloads/technicaljobs.json
+
+Option for Mongodb Server
 	service mongod status
 	service mongod stop
 	service mongod start
 
-
+mongodb terminal commands
 	show dbs
 
-	Option 2: is using global setting that allows root, by creating file: /root/.bowerrc which have inside following configuration:
+Option 2: is using global setting that allows root, by creating file: /root/.bowerrc which have inside following configuration:
 
 { "allow_root": true }
 
