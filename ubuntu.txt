@@ -1,0 +1,162 @@
+sudo apt-get update
+sudo apt-get install apache2
+sudo nano /etc/apache2/apache2.conf
+ServerName localhost
+ServerName
+
+rm -rfv dontDeleteMe/*
+
+sudo ufw app list
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+
+sudo apt-get install mysql-server
+
+sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+
+sudo nano /etc/apache2/mods-enabled/dir.conf
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+
+sudo systemctl restart apache2
+sudo systemctl status apache2
+
+apt-cache search php- | less
+apt-cache show php-cli
+sudo apt-get install php-cli php-intl
+
+sudo nano /var/www/html/info.php
+
+sudo apt-get install phpmyadmin php-mbstring php-gettext
+sudo phpenmod mcrypt
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+
+sudo apt-get update
+sudo apt-get install curl git unzip
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+sudo dpkg -i
+
+sudo a2enmod rewrite
+
+sudo apt-get -f install
+
+apt-cache show php7.0-curl
+sudo apt-get install php7.0-curl
+*ei7676Iq#
+
+dpkg -L senmail
+dpkg --get-selections | grep sendmail
+
+sudo apt-get remove  network-manager-vpnc
+sudo apt-get remove --auto-remove network-manager-vpnc
+sudo apt-get purge network-manager-vpnc.*
+sudo apt-get purge --auto-remove network-manager-vpnc.*
+
+service sendmail restart
+sendmail dillippradhan1988@gmail.com
+sudo apt-get install sendmail-bin
+
+
+ # add to /etc/postfix/main.cf
+ smtp_sasl_auth_enable = yes
+ smtp_sasl_security_options = noplaintext noanonymous
+ smtp_sasl_password_maps = hash:/etc/postfix/sasl_password
+
+
+ smtp.gmail.com dillippradhan1988@gmail.com:k
+
+apt-get purge sendmail*
+mailhub=smtp.gmail.com:587
+UseSTARTTLS=YES
+AuthUser=dillippradhan1988@gmail.com
+AuthPass=dkppuja23&
+
+
+root=dillippradhan1988@gmail.com
+mailhub=smtp.gmail.com:465
+rewriteDomain=gmail.com
+AuthUser=dillippradhan1988@gmail.com
+AuthPass=dkppuja23&
+FromLineOverride=YES
+UseTLS=YES
+
+ssmtp dillippradhan1988@gmail.com
+
+uname -a
+
+mysqldump -u root -p mfgtoolapitest > mfgtoolapitest_bckup.sql
+
+mysql -u root -p mfgtoolapitest < mfgtoolapitest_bckup.sql
+
+mysql -u root -p
+
+du -hs filename
+
+CRON
+--------------------------------------------------------
+chmod +x mac_cron.php
+crontab -e
+
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+31 12 * * * php -f /var/www/html/cronjob/mac_cron.php
+
+
+crontab -l
+
+crontab --help
+man crontab
+
+ifconfig -a
+
+rm -rfv dontDeleteMe/*
+
+see list of user
+	cut -d: -f1 /etc/passwd
+
+add user and giving root priviledge
+	adduser sammy
+	usermod -aG sudo sammy
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCi1pfSPnCFfU0X58x2Qw6SdGSpsoAfArSaxa5AAS1iLjVZ5jdJnWdMUg5WtcRSif9/ZK6o1LdCDhOk7s5k5O30tStaT1vLQSeUJokP1k5EDQtXa6RlUw5tpJ/HlsXMGAz3EOjoN8rS9fPDi5NKMQvbRRa/ETxAWqkgaDwWGLyQ5CV13lUhTIwpxvObLrX6U4AQSxBeQVNo5xfhl3gdsA2960bURWipJ8Q7dArblOtmuO5y6nTs5SHYwHc2lAY7TwlXnGzfAhPh69ZsJVvLO8hvSAXVEtf9nRip+wBiQMIN8CVN3TqumJk4ywLNc2HE9/VHl8kQk/DRbwo1q6x5O1g5 pkgst2@pkgst2
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDg7HRTZMGqIProh5M76HxYBLkr7RXJwvWUD2Tcalw3m2s39s8PeJlL4IQpCcemosAAZoSjB5t1miNXpSEb3Tjo742aBrSNfV+DPi0M/UbI9Wt1cJTKYZkxZbF0FkU+6y2dvWNr5lGb+LQqvecuYCvur18WKtqeexxX2R+GEbRWFq4/boEjYVqkG92i5uvDm4EQLpUXlFmdRpT/PW0l4drT5E9YcsYrUc4upR3CXIWOuJNvCUo4eNFpdrBj82JSQIUn1FiFa1G2eDgA0uhqI3tSAZJ1snJIzXgskZU/4pL43hQP5b3cxPGmyrHESUe1j7oEOE8u7zg01WKj0/nAarj3 root@pkgst2
+
+display all users
+	compgen -u
+	compgen -g
+
+public ip
+	dig TXT +short o-o.myaddr.l.google.com @ns1.google.com
+
+see firewall
+	cat /etc/rc.local
+
+network IP address, netmask, and gateway info?
+	nmcli dev show enp2s0 | grep IP4
