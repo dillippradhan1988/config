@@ -72,3 +72,36 @@ Globals
 
 	local globals (variables specific to the current module).
 		ex: module and exports.
+
+
+A few points to keep in mind when working with async functions based
+on callbacks are the following:
+1. Never call the callback twice.
+2. Never throw an error.
+
+client-side XHRs (XMLHttpRequest)
+XMLHttpRequest (XHR) is a global class available in all modern browsers that allows you to make HTTP requests
+using JavaScript. The name is XMLHttpRequest to ensure that all browsers follow the same name for this class. The name
+has XML in it because that was the original intended data format for making HTTP requests, but it is not relevant anymore
+as it can be used to make HTTP requests in any format. In fact, most people just use the JSON format now.
+
+The View handles the visual part,
+taking care of user interaction. The Controller responds to system and user events,
+commanding the Model and View to change appropriately. The Model handles data
+manipulation, responding to requests for information or changing its state according
+to the Controller's instructions.
+
+thread & process
+http://www.cs.ucsb.edu/~rich/class/cs170/notes/IntroThreads/
+
+
+websocket
+https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
+
+http://stackoverflow.com/questions/5062614/how-to-decide-when-to-use-node-js
+
+"It is impossible for a distributed computer system to simultaneously provide all three of the
+following guarantees: Consistency, Availability, and Partition tolerance."
+
+mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
+http://code.tutsplus.com/tutorials/javascript-hoisting-explained--net-15092

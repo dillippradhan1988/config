@@ -1,5 +1,29 @@
 Introduction
-------------
+------------	
+	Traditional RDBMS solutions are good at consistency and compromise a little once
+	it comes to providing better availability (data reads) and partitioning capabilities.
+	Most of the NoSQL solutions have been evolved in this direction to achieve better
+	heights in data availability and partitioning.
+
+	Most popular subsets of NoSQL are
+	document stores, key-value stores, and graph-based database solutions.
+
+	documents are stored and retrieved from
+	MongoDB as JavaScript objects. Internally, this JSON data gets converted to BSON
+	format while getting persisted to the system. So, this gives an extreme flexibility where
+	we can use the same data format from client to server and eventually to the database.
+
+	MongoDB is its schemaless nature
+
+	highly concurrent applications with
+	heavy read operations in mind.
+
+	MongoDB also introduces the concept of sharding, which makes it possible to scale
+	the database horizontally as well as vertically. If the application owner needs to
+	increase the database capabilities, they could add up more machines into the stack.
+	This is a cheaper option compared to investing on RAM of a single machine, which
+	will be the case in RDBMS solutions.
+
 	MongoDB is a document-oriented database, not a relational one. The primary reason
 	for moving away from the relational model is to make scaling out easier, but there are
 	some other advantages as well.
