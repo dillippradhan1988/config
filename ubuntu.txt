@@ -160,3 +160,14 @@ see firewall
 
 network IP address, netmask, and gateway info?
 	nmcli dev show enp2s0 | grep IP4
+
+wget https://nodejs.org/dist/v4.4.5/node-v4.4.5.tar.gz
+tar xzvf node-v*
+cd node-v*
+./configure
+make
+sudo make install
+cd ~
+rm -rf ~/node-v*
+
+sudo npm install -g bower grunt-cli

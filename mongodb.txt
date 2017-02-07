@@ -1,114 +1,20 @@
-online
----------------------------------------------------------------------------
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
-sudo apt-get update
-sudo apt-get install mongodb-org
-ps -ef | grep mongo
-mongo --version
+Introduction
+------------
+	MongoDB is a document-oriented database, not a relational one. The primary reason
+	for moving away from the relational model is to make scaling out easier, but there are
+	some other advantages as well.
 
-offline
---------------------------------------------------------------------------------
-Step-1
-	tar -zxvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
-	
-Step-2
-	sudo mkdir /usr/lib/mongodb
-	
-Step-3
-	sudo mv mongodb-linux-x86_64-ubuntu1404-3.2.6 /usr/lib/mongodb/
-	
-Step-4
-	Before you start mongod for the first time, you will need to create the data directory. 
-	By default, mongod writes data to the /data/db/ directory. 
-	To create this directory, and set the appropriate permissions use the following commands:
-	
-	mkdir -p /data/db
-	
-Step-5
-	chmod 777 /data/*
-	
-Step-6
-	1st command prompt: Start mongodb server
-	cd /usr/lib/mongodb/mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/
-	
-Step-7
-	./mongod
-
-Step-8
-	2nd command prompt: Start the client
-	cd /usr/lib/mongodb/mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/
-
-Step-9	
-	./mongo
-
-Step-10
-	Check this http://localhost:28017/ in browser to know database status
-	
-
-Import from JSON file	
-	./mongoimport --jsonArray --db bazarplanet --collection locations --file /home/dillip/Downloads/location.json
-
-Export To JSON file
-	./mongoexport --db bazarplanet --collection technicaljobs --out /home/dillip/Downloads/technicaljobs.json
-
-Option for Mongodb Server
-	service mongod status
-	service mongod stop
-	service mongod start
-
-mongodb terminal commands
-	show dbs
-
-Option 2: is using global setting that allows root, by creating file: /root/.bowerrc which have inside following configuration:
-
-{ "allow_root": true }
-
-sudo nano test.js
-To remove everything in a directory without removing the directory, type in:
-
-rm -rf lampp
-Add sudo at the beginning of the command :
-
-sudo rm -rf folderName
-Otherwise, without sudo you will be returned permission denied. And it's a good practice to try not to use -f while deleting a directory:
-
-sudo rm -r folderName
-Note: this is assuming you are already on the same level of the folder you want to delete in terminal, if not:
-
-sudo rm -r /path/to/folderName
-FYI: you can use letters -f, -r, -v:
-
--f = to ignore non-existent files, never prompt
--r = to remove directories and their contents recursively
--v = to explain what is being done
-
-curl -w "\n" http://162.243.70.202/metadata/v1/interfaces/private/0/ipv4/address 
-
-
-
-MongoDB is a document-oriented database, not a relational one. The primary reason
-for moving away from the relational model is to make scaling out easier, but there are
-some other advantages as well.
-
-• A document is the basic unit of data for MongoDB and is roughly equivalent to a
-row in a relational database management system (but much more expressive).
-• Similarly, a collection can be thought of as a table with a dynamic schema.
-• A single instance of MongoDB can host multiple independent databases, each of
-which can have its own collections.
-• Every document has a special key, "_id", that is unique within a collection.
-• MongoDB comes with a simple but powerful JavaScript shell, which is useful for
-the administration of MongoDB instances and data manipulation.
-
-
-
-To start the server,run the mongod executable:
-	mongod
-	
-To start the client,run the mongo executable:	
-	mongo
+	• A document is the basic unit of data for MongoDB and is roughly equivalent to a
+	row in a relational database management system (but much more expressive).
+	• Similarly, a collection can be thought of as a table with a dynamic schema.
+	• A single instance of MongoDB can host multiple independent databases, each of
+	which can have its own collections.
+	• Every document has a special key, "_id", that is unique within a collection.
+	• MongoDB comes with a simple but powerful JavaScript shell, which is useful for
+	the administration of MongoDB instances and data manipulation.
 	
 Data Types
+-----------
 	null
 		Null can be used to represent both a null value and a nonexistent field:
 			{"x" : null}
@@ -206,16 +112,3 @@ MongoDB is its JSON-like storage format named
 BSON. Standing for Binary JSON, the BSON format is a binary-encoded serialization
 of JSON-like documents, and it is designed to be more efficient in size and speed,
 allowing MongoDB's high read/write throughput.
-
-
-
-wget https://nodejs.org/dist/v4.4.5/node-v4.4.5.tar.gz
-tar xzvf node-v*
-cd node-v*
-./configure
-make
-sudo make install
-cd ~
-rm -rf ~/node-v*
-
-sudo npm install -g bower grunt-cli

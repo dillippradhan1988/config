@@ -1,78 +1,79 @@
 Install Apache
 ---------------
-sudo apt-get update
-sudo apt-get install apache2
+	sudo apt-get update
+	sudo apt-get install apache2
 
-to know ip address
-	curl http://icanhazip.com
+	to know ip address
+		curl http://icanhazip.com
 
-Install Apache Module
-	sudo a2enmod rewrite
-	sudo service apache2 restart
-	
-http://your_server_IP_address
+	Install Apache Module
+		sudo a2enmod rewrite
+		sudo service apache2 restart
+		
+	http://your_server_IP_address
 
 
 Install MySQL
 --------------
-sudo apt-get install mysql-server php5-mysql
+	sudo apt-get install mysql-server php5-mysql
 
-sudo mysql_install_db
+	sudo mysql_install_db
 
-sudo mysql_secure_installation
+	sudo mysql_secure_installation
 
-Stop the MySQL Server
-	sudo /etc/init.d/mysql stop
+	Stop the MySQL Server
+		sudo /etc/init.d/mysql stop
 
-Start the mysqld configuration
-	sudo mysqld --skip-grant-tables &
+	Start the mysqld configuration
+		sudo mysqld --skip-grant-tables &
 
-Login to MySQL as root
-	mysql -u root mysql
+	Login to MySQL as root
+		mysql -u root mysql
 
-Replace YOURNEWPASSWORD with your new password!
-	UPDATE user SET Password=PASSWORD('bzrplnt23$') WHERE User='root'; FLUSH PRIVILEGES; exit;
+	Replace YOURNEWPASSWORD with your new password!
+		UPDATE user SET Password=PASSWORD('bzrplnt23$') WHERE User='root'; FLUSH PRIVILEGES; exit;
 
 Install PHP
 -----------
-sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+	sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
 
 
-sudo nano /etc/apache2/mods-enabled/dir.conf
+	sudo nano /etc/apache2/mods-enabled/dir.conf
 
-<IfModule mod_dir.c>
-    ##DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
-    DirectoryIndex index.php index.cgi index.pl index.xhtml index.htm
-</IfModule>
+	<IfModule mod_dir.c>
+	    ##DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+	    DirectoryIndex index.php index.cgi index.pl index.xhtml index.htm
+	</IfModule>
 
-sudo service apache2 restart
+	sudo service apache2 restart
 
-Install PHP Modules
-	sudo php5enmod mcrypt
-	sudo service apache2 restart 
+	Install PHP Modules
+		sudo php5enmod mcrypt
+		sudo service apache2 restart 
 
-Test PHP
-	sudo nano /var/www/html/info.php
-	<?php
-		phpinfo();
-	?>
-	http://127.0.0.1/info.php
+	Test PHP
+		sudo nano /var/www/html/info.php
+		<?php
+			phpinfo();
+		?>
+		http://127.0.0.1/info.php
 
 
 Install phpMyAdmin
 ------------------
-apt-get -y install phpmyadmin
+	apt-get -y install phpmyadmin
 
-sudo nano /etc/apache2/apache2.conf
+	sudo nano /etc/apache2/apache2.conf
 
-# phpMyAdmin Configuration
-Include /etc/phpmyadmin/apache.conf
+	# phpMyAdmin Configuration
+	Include /etc/phpmyadmin/apache.conf
 
-service apache2 restart
+	service apache2 restart
 
-http://127.0.0.1/phpmyadmin
+	http://127.0.0.1/phpmyadmin
 
 Increase Import File size
+--------------------------
 	sudo nano /etc/php5/apache2/php.ini
 
 	post_max_size >= upload_max_filesize
@@ -80,3 +81,98 @@ Increase Import File size
 	post_max_size
 
 	upload_max_filesize
+
+Install MongoDB
+----------------
+online
+---------
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+	echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
+	sudo apt-get update
+	sudo apt-get install mongodb-org
+	ps -ef | grep mongo
+	mongo --version
+
+offline
+-----------
+	Step-1
+		tar -zxvf mongodb-linux-x86_64-ubuntu1404-3.2.6.tgz
+		
+	Step-2
+		sudo mkdir /usr/lib/mongodb
+		
+	Step-3
+		sudo mv mongodb-linux-x86_64-ubuntu1404-3.2.6 /usr/lib/mongodb/
+		
+	Step-4
+		Before you start mongod for the first time, you will need to create the data directory. 
+		By default, mongod writes data to the /data/db/ directory. 
+		To create this directory, and set the appropriate permissions use the following commands:
+		
+		mkdir -p /data/db
+		
+	Step-5
+		chmod 777 /data/*
+		
+	Step-6
+		1st command prompt: Start mongodb server
+		cd /usr/lib/mongodb/mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/
+		
+	Step-7
+		./mongod
+
+	Step-8
+		2nd command prompt: Start the client
+		cd /usr/lib/mongodb/mongodb-linux-x86_64-ubuntu1404-3.2.6/bin/
+
+	Step-9	
+		./mongo
+
+	Step-10
+		Check this http://localhost:28017/ in browser to know database status
+		
+
+	Import from JSON file	
+		./mongoimport --jsonArray --db bazarplanet --collection locations --file /home/dillip/Downloads/location.json
+
+	Export To JSON file
+		./mongoexport --db bazarplanet --collection technicaljobs --out /home/dillip/Downloads/technicaljobs.json
+
+	Option for Mongodb Server
+		service mongod status
+		service mongod stop
+		service mongod start
+
+	mongodb terminal commands
+		show dbs
+
+	Option 2: is using global setting that allows root, by creating file: /root/.bowerrc which have inside following configuration:
+
+	{ "allow_root": true }
+
+	sudo nano test.js
+	To remove everything in a directory without removing the directory, type in:
+
+	rm -rf lampp
+	Add sudo at the beginning of the command :
+
+	sudo rm -rf folderName
+	Otherwise, without sudo you will be returned permission denied. And it's a good practice to try not to use -f while deleting a directory:
+
+	sudo rm -r folderName
+	Note: this is assuming you are already on the same level of the folder you want to delete in terminal, if not:
+
+	sudo rm -r /path/to/folderName
+	FYI: you can use letters -f, -r, -v:
+
+	-f = to ignore non-existent files, never prompt
+	-r = to remove directories and their contents recursively
+	-v = to explain what is being done
+
+	curl -w "\n" http://162.243.70.202/metadata/v1/interfaces/private/0/ipv4/address 
+
+	To start the server,run the mongod executable:
+		mongod
+		
+	To start the client,run the mongo executable:	
+		mongo

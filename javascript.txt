@@ -72,4 +72,3 @@ Globals
 
 	local globals (variables specific to the current module).
 		ex: module and exports.
-
