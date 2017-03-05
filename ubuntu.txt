@@ -44,16 +44,16 @@ sudo a2enmod rewrite
 sudo apt-get -f install
 
 apt-cache show php7.0-curl
-sudo apt-get install php7.0-curl
+sudo apt-get install php7.0-mysql
 *ei7676Iq#
 
 dpkg -L senmail
 dpkg --get-selections | grep sendmail
 
-sudo apt-get remove  network-manager-vpnc
-sudo apt-get remove --auto-remove network-manager-vpnc
-sudo apt-get purge network-manager-vpnc.*
-sudo apt-get purge --auto-remove network-manager-vpnc.*
+sudo apt-get remove  mysql
+sudo apt-get remove --auto-remove mysql
+sudo apt-get purge mysql.*
+sudo apt-get purge --auto-remove mysql.*
 
 service sendmail restart
 sendmail dillippradhan1988@gmail.com

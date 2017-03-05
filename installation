@@ -222,12 +222,10 @@ fot importing files & folder to local repository
 
 Node Installation
 -------------------
-cd /tmp
-wget http://nodejs.org/dist/v4.4.4/node-v0.12.0-linux-x64.tar.gz
-tar xvfz node-v4.4.4-linux-x64.tar.gz
-sudo mkdir -p /usr/local/nodejs
-sudo mv node-v0.12.0-linux-x64/* /usr/local/nodejs
-export PATH=$PATH:/usr/local/nodejs/bin
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+sudo apt-get install nodejs
+node -v 
 
 to create file
 	sudo nano main.js
