@@ -512,249 +512,261 @@ Expressions and Operators
 			action and returns true . Otherwise, delete attempts to delete the specified lvalue.
 			delete returns true if it successfully deletes the specified lvalue.
 
-Statements
-	statements are JavaScript sentences or commands
+Object
+	An object is a composite value: it aggregates multiple values (primitive values or other objects) and allows you to store and retrieve those values by name. An object is an unordered collection of properties, eachof which has a name and a value. Property names are strings, so we can say that objects map strings to values.
 
-	Expressions are evaluated to produce a value, but statements are executed to make something happen.
+	a JavaScript object also inherits the properties of another object, known as its “prototype.” 
 
-	JavaScript has a number of statements or control structures that do just this:
-		• Conditionals are statements like if and switch that make the JavaScript interpreter
-		execute or skip other statements depending on the value of an expression.
+	objects are mutable and are manipulated by reference rather than by value. If the variable x refers to an object, and the code var y = x; is executed, the variable y holds a reference to the same object, not a copy of that object. 
 
-		• Loops are statements like while and for that execute other statements repetitively.
+	A property has a name and a value.In addition to its name and value, each property has associated values that we’ll call "property attributes":
 
-		• Jumps are statements like break , return , and throw that cause the interpreter to
-		jump to another part of the program.
+		• The writable attribute specifies whether the value of the property can be set.
+		• The enumerable attribute specifies whether the property name is returned by a
+		for/in loop.
+		• The configurable attribute specifies whether the property can be deleted and
+		whether its attributes can be altered.
 
-	5.1 Expression Statements
-		Assignment statements are one major category of expression statements. For ex
-			greeting = "Hello " + name;
-			i *= 3;
+	each object has three associated "object attributes":
 
-	5.2 Compound and Empty Statements
-		Just as the comma operator combines multiple expressions into a single
-		expression, a statement block combines multiple statements into a single compound
-		statement
+		• An object’s prototype is a reference to another object from which properties are
+		inherited.
+		• An object’s class is a string that categorizes the type of an object.
+		• An object’s extensible flag specifies (in ECMAScript 5) whether new properties may
+		be added to the object.
 
-			{
-				x = Math.PI;
-				cx = Math.cos(x);
-				console.log("cos(π) = " + cx);
-			}
+	Finally, here are some terms we’ll use to distinguish among three broad categories of
+	JavaScript objects and two types of properties:
 
-		The empty statement is the opposite: it allows you to include
-		no statements where one is expected. The empty statement looks like this:
-		;
+		• A native object is an object or class of objects defined by the ECMAScript specifi-
+		cation. Arrays, functions, dates, and regular expressions (for example) are native
+		objects.
+		• A host object is an object defined by the host environment (such as a web browser)
+		within which the JavaScript interpreter is embedded. The HTMLElement objects
+		that represent the structure of a web page in client-side JavaScript are host objects.
+		Host objects may also be native objects, as when the host environment defines
+		methods that are normal JavaScript Function objects.
+		• A user-defined object is any object created by the execution of JavaScript code.
+		• An own property is a property defined directly on an object.
+		• An inherited property is a property defined by an object’s prototype object.
 
-		The JavaScript interpreter takes no action when it executes an empty statement. The
-		empty statement is occasionally useful when you want to create a loop that has an
-		empty body. Consider the following for loop:
+	6.1 Creating Objects
+		Objects can be created with object literals, with the new keyword, and (in
+		ECMAScript 5) with the Object.create() function.
 
-			// Initialize an array a
-			for(i = 0; i < a.length; a[i++] = 0) ;
+		6.1.1 Object Literals
+			var point = { x:0, y:0 };
 
-			if ((a == 0) || (b == 0));	// Oops! This line does nothing...
-			o = null;					// and this line is always executed.
-
-	5.3 Declaration Statements
-		The var and function are declaration statements—they declare or define variables and
-		functions.
-
-		5.3.1 var
-			If a var statement appears within the body of a function, it defines local variables,
-			scoped to that function. When var is used in top-level code, it declares global variables,
-			visible throughout the JavaScript program. As noted in §3.10.2, global variables are
-			properties of the global object. Unlike other global properties, however, properties
-			created with var cannot be deleted.
-
-		5.3.2 function
-			We can invoke a Java-Script function before you declare it.
-
-			Like the var statement, function declaration statements create variables that cannot be
-			deleted. These variables are not read-only, however, and their value can be overwritten.
-
-	5.4 Conditional Statements
-		5.4.1 if
-			// If username is null, undefined, false, 0, "", or NaN, give it a new value
-			if (!username) username = "John Doe";
-
-		5.4.2 else if
-			when you need to execute one of many pieces of code? One way to do this is with an else if statement. 
-
-			else if is not really a JavaScript statement, but simply a frequently used programming idiom that results when repeated if/else statements are used
-
-		5.4.3 switch
-			An if statement causes a branch in the flow of a program’s execution, and you can use
-			the else if idiom to perform a multiway branch. This is not the best solution, however,
-			when all of the branches depend on the value of the same expression. In this case, it is
-			wasteful to repeatedly evaluate that expression in multiple if statements.
-
-			The switch statement handles exactly this situation. The switch keyword is followed
-			by an expression in parentheses and a block of code in curly braces:
-
-			switch(expression) {
-				statements
-			}
-
-			When using switch inside a function, however, you may
-			use a return statement instead of a break statement. Both serve to terminate the
-			switch statement and prevent execution from falling through to the next case .
-
-			function convert(x) {
-				switch(typeof x) {
-					case 'number':
-						return x.toString(16);
-					case 'string':
-						return '"' + x + '"';
-					default:
-						return String(x);
+			book = {
+				"main title": "JavaScript",
+				'sub-title': "The Definitive Guide",
+				"for": "all audiences",
+				author: {
+					firstname: "David",
+					surname: "Flanagan"
 				}
 			}
 
-			The matching case is determined using the === identity operator, not the == equality operator, so the expressions must match without any type conversion.
+			An object literal is an expression that creates and initializes a new and distinct object
+			each time it is evaluated.
 
-			Note that in the examples above, the default: label appears at the end of the switch body, following all the case labels. This is a logical and common place for it, but it can actually appear	anywhere within the body of the statement.
+		6.1.2 Creating Objects with new
+			The new operator creates and initializes a new object. The new keyword must be followed
+			by a function invocation. A function used in this way is called a constructor and serves
+			to initialize a newly created object.
 
-	5.5 Loops
-		JavaScript has four looping statements: while , do/while , for , and for/in .
+				var o = new Object();
+				var o = new Array();
+				var o = new Date();
+				var o = new RegExp('js');
 
-		5.5.3 do/while
-			First, the do loop requires both the do keyword (to mark the beginning of
-			the loop) and the while keyword (to mark the end and introduce the loop condition).
-			Also, the do loop must always be terminated with a semicolon. The while loop doesn’t
-			need a semicolon if the loop body is enclosed in curly braces.
+		6.1.3 Prototypes
+			All objects created by object literals have the same prototype object, and we can refer
+			to this prototype object in JavaScript code as Object.prototype .
 
-		5.5.3 for
-			initialize , test , and increment are three expressions (separated by semicolons) that
-			are responsible for initializing, testing, and incrementing the loop variable.
+			Objects created using the new keyword and a constructor invocation use the value of the prototype propertyof the constructor function as their prototype. 
 
-			function tail(o) {
-				// Return the tail of linked list o
-				for(; o.next; o = o.next) /* empty */ ; // Traverse while o.next is truthy
-				return o;
-			}
+			So the object created by new Object()	inherits from Object.prototype just as the object created by {} does. 
 
-			Note that the code above has no initialize expression. Any of the three expressions
-			may be omitted from a for loop, but the two semicolons are required. If you omit the
-			test expression, the loop repeats forever, and for(;;) is another way of writing an
-			infinite loop, like while(true) .
+			Similarly, the object created by new Array() uses Array.prototype as its prototype, and the object created by new Date() uses Date.prototype as its prototype.
 
-		5.5.4 for/in
-			To execute a for/in statement, the JavaScript interpreter first evaluates the object ex-
-			pression. If it evaluates to null or undefined , the interpreter skips the loop and moves
-			on to the next statement. 3 If the expression evaluates to a primitive value, that value is
-			converted to its equivalent wrapper object (§3.6). Otherwise, the expression is already
-			an object. The interpreter now executes the body of the loop once for each enumerable
-			property of the object.
+			var o = new Date();
+			o inherit from Date.prototype and Object.prototype
 
-	5.6 Jumps
-		Another category of JavaScript statements are jump statements. As the name implies,
-		these cause the JavaScript interpreter to jump to a new location in the source code. The
-		break statement makes the interpreter jump to the end of a loop or other statement.
-		continue makes the interpreter skip the rest of the body of a loop and jump back to the
-		top of a loop to begin a new iteration.
+			so a Date object created by new Date() inherits properties from
+			both Date.prototype and Object.prototype . This linked series of prototype objects is
+			known as a prototype chain.
 
-		5.6.1 Labeled Statements
-			break and continue are theonly JavaScript statements that use statement labels
+		6.1.4 Object.create()
+			ECMAScript 5 defines a method, Object.create() , that creates a new object, using its
+			first argument as the prototype of that object. Object.create() also takes an optional
+			second argument that describes the properties of the new object.
 
-			mainloop: while(token != null) {
-				// Code omitted...
-				continue mainloop; // Jump to the next iteration of the named loop
-				// More code omitted...
-			}
-			The namespace for labels is different than the namespace for variables and functions, so you can use the same identifier as a statement label and as a variable or function name. Statement labels are defined only within the statement to	which they apply (and within its substatements, of course). A statement may not have the same label as a statement that contains it, but two statements may have the same label as long as neither one is nested within the other. Labeled statements may them-	selves be labeled. Effectively, this means that any statement may have multiple labels.
+			var o1 = Object.create({x:1, y:2}); // o1 inherits properties x and y.
 
-		5.6.2 break
-			A newline is not allowed between the break keyword and the labelname . This is a result
-			of JavaScript’s automatic insertion of omitted semicolons: if you put a line terminator
-			between the break keyword and the label that follows, JavaScript assumes you meant
-			to use the simple, unlabeled form of the statement and treats the line terminator as a
-			semicolon.
-
-		5.6.3 continue
-			The continue statement, in both its labeled and unlabeled forms, can be used only
-			within the body of a loop. Using it anywhere else causes a syntax error.
-
-			• In a while loop, the specified expression at the beginning of the loop is tested again,
-			and if it’s true , the loop body is executed starting from the top.
-
-			• In a do/while loop, execution skips to the bottom of the loop, where the loop
-			condition is tested again before restarting the loop at the top.
-
-			• In a for loop, the increment expression is evaluated, and the test expression is
-			tested again to determine if another iteration should be done.
-
-			• In a for/in loop, the loop starts over with the next property name being assigned
-			to the specified variable.
-
-		5.6.4 return
-			A return statement may appear only within the body of a function. It is a syntax error
-			for it to appear anywhere else.
-
-			The return statement can also be used without an expression to make the function
-			return undefined to its caller.
-
-		5.6.5 throw
-			An Error object has a name property that specifies	the type of error and a message property that holds the string passed to the constructor function (see the Error class in the reference section).
-
-			If no exception handler is ever found, the exception is treated as an error and is reported to the user.
-
-		5.6.6 try/catch/finally
-			Both the catch and finally blocks are optional, but a try block must be accompanied by at least one of these blocks.
-			
-			If an exception occurs in the try block and there is an associated catch block to handle
-			the exception, the interpreter first executes the catch block and then the finally block.
-			If there is no local catch block to handle the exception, the interpreter first executes
-			the finally block and then jumps to the nearest containing catch clause.
-			
-			If a finally block itself causes a jump with a return , continue , break , or throw statement,
-			or by calling a method that throws an exception, the interpreter abandons whatever
-			jump was pending and performs the new jump.
-			
-			try and finally can be used together without a catch clause.
-
-	5.7 Miscellaneous Statements
-		This section describes the remaining three JavaScript statements— with , debugger , and
-		use strict .
-
-		5.7.1 with
-			The with statement is used to temporarily extendthe scope chain. It has the following syntax:
-
-			with (object)
-				statement
-
-			The common use of the with statement is to make it easier to work with deeply nested
-			object hierarchies
-
-			document.forms[0].address.value
-
-			If you need to write expressions like this a number of times, you can use the with
-			statement to add the form object to the scope chain:
-			
-			with(document.forms[0]) {
-				// Access form elements directly here. For example:
-				name.value = "";
-				address.value = "";
-				email.value = "";
-			}
-
-			with(o) x = 1;
-			If the object o has a property x , then this code assigns the value 1 to that property. But
-			if x is not defined in o , this code is the same as x = 1 without the with statement. It
-			assigns to a local or global variable named x , or creates a new property of the global
-			object. A with statement provides a shortcut for reading properties of o , but not for
-			creating new properties of o .
-
-		5.7.2 debugger
-			debugger statement acts like a breakpoint: exe-cution of JavaScript code stops and you can use the debugger to print variables’ values,examine the call stack, and so on
-
-		5.7.3 “use strict”
-			"use strict" is a directive introduced in ECMAScript 5.
+			You can pass null to create a new object that does not have a prototype, but if you do
+			this, the newly created object will not inherit anything, not even basic methods like
+			toString() (which means it won’t work with the + operator either):
 
 
-			
+				var o2 = Object.create(null);
 
-			
+			If you want to create an ordinary empty object (like the object returned by {} or new
+			Object() ), pass Object.prototype :
+
+				var o3 = Object.create(Object.prototype); // o3 is like {} or new Object().
+
+	6.2 Querying and Setting Properties
+		If an object has properties whose name is a reserved
+		word, you must use square bracket notation to access them: o["for"] and
+		o["class"] . ECMAScript 5 relaxes this restriction (as do some implementations of
+		ECMAScript 3) and allows reserved words to follow the dot.
+
+		6.2.3 Property Access Errors
+			It is not an error to query a property that does not exist. If the property x is not found
+			as an own property or an inherited property of o , the property access expression o.x
+			evaluates to undefined . Recall that our book object has a “sub-title” property, but not
+			a “subtitle” property:
+
+				book.subtitle;			// => undefined: property doesn't exist
+
+			It is an error, however, to attempt to query a property of an object that does not exist.
+			The null and undefined values have no properties, and it is an error to query properties
+			of these values. Continuing the above example:
+
+			// Raises a TypeError exception. undefined doesn't have a length property
+				var len = book.subtitle.length;
+
+			Attempting to set a property on null or undefined also causes a TypeError
+
+			// The prototype properties of built-in constructors are read-only.
+			Object.prototype = 0; // Assignment fails silently; Object.prototype unchanged
+
+			An attempt to set a property p of an object ofails in these circumstances:
+
+				• o has an own property p that is read-only: it is not possible to set read-only prop-
+				erties. (See the defineProperty() method, however, for an exception that allows
+				configurable read-only properties to be set.)
+				• o has an inherited property p that is read-only: it is not possible to hide an inherited
+				read-only property with an own property of the same name.
+				• o does not have an own property p ; o does not inherit a property p with a setter
+				method, and o ’s extensible attribute (see §6.8.3) is false . If p does not already
+				exist on o , and if there is no setter method to call, then p must be added to o . But
+				if o is not extensible, then no new properties can be defined on it.
+
+	6.3 Deleting Properties
+		The delete operator (§4.13.3) removes a property from an object.
+			delete book.author;
+
+		The delete operator only deletes own properties, not inherited ones. (To delete an
+		inherited property, you must delete it from the prototype object in which it is defined.
+		Doing this affects every object that inherits from that prototype.)
+
+		A delete expression evaluates to true if the delete succeeded or if the delete had no
+		effect (such as deleting a nonexistent property). delete also evaluates to true when used
+		(meaninglessly) with an expression that is not a property access expression:
+
+		o = {x:1};			//o has own property x and inherits property toString
+		delete o.x;			//Delete x, and return true
+		delete o.x;			//Do nothing (x doesn't exist), and return true
+		delete o.toString;	/Do nothing (toString isn't an own property), return true
+		delete 1;			//Nonsense, but evaluates to true
+
+
+		delete Object.prototype;		//Can't delete; property is non-configurable
+		var x = 1;						//Declare a global variable
+		delete this.x;					//Can't delete this property
+		function f() {}					//Declare a global function
+		delete this.f;					//Can't delete this property either
+
+		When deleting configurable properties of the global object in non-strict mode, you can
+		omit the reference to the global object and simply follow the delete operator with the
+		property name:
+			this.x = 1;		// Create a configurable global property (no var)
+			delete x;		// And delete it
+
+		In strict mode, however, delete raises a SyntaxError if its operand is an unqualified
+		identifier like x , and you have to be explicit about the property access:
+		
+			delete x;			// SyntaxError in strict mode
+			delete this.x;		// This works
+
+	6.4 Testing Properties
+		You can do this
+			with the in operator, 
+			with the hasOwnProperty() and
+			propertyIsEnumerable() methods,
+			or simply by querying the property.
+
+		var o = { x: 1 }
+		"x" in o;		 	// true: o has an own property "x"
+		"y" in o;			// false: o doesn't have a property "y"
+		"toString" in o;	// true: o inherits a toString property
+
+		Instead of using the in operator it is often sufficient to simply query the property and
+		use !== to make sure it is not undefined:
+
+		The hasOwnProperty() method of an object tests whether that object has an own prop-
+		erty with the given name. It returns false for inherited properties:
+
+			var o = { x: 1 }
+			o.hasOwnProperty("x");			// true: o has an own property x
+			o.hasOwnProperty("y");			// false: o doesn't have a property y
+			o.hasOwnProperty("toString"); 	// false: toString is an inherited property
+
+		The propertyIsEnumerable() refines the hasOwnProperty() test. It returns true only if
+		the named property is an own property and its enumerable attribute is true .
+
+			var o = inherit({ y: 2 });
+			o.x = 1;
+			o.propertyIsEnumerable("x"); // true: o has an own enumerable property x
+			o.propertyIsEnumerable("y"); // false: y is inherited, not own
+			Object.prototype.propertyIsEnumerable("toString"); // false: not enumerable
+
+	6.5 Enumerating Properties
+		The for/in loop was covered in §5.5.4. It runs the body of the loop once for each
+		enumerable property (own or inherited) of the specified object, assigning the name of
+		the property to the loop variable.
+
+		The first is Object.keys() , which returns an array of the names of the
+		enumerable own properties of an object. It works just like the keys() utility function
+
+		The second ECMAScript 5 property enumeration function is Object.getOwnProperty
+		Names() . It works like Object.keys() but returns the names of all the own properties of
+		the specified object, not just the enumerable properties.
+	
+	6.6 Property Getters and Setters
+		We’ve said that an object property is a name, a value, and a set of attributes. In
+		ECMAScript 5 3 the value may be replaced by one or two methods, known as a getter and a setter. Properties defined by getters and setters are sometimes known as accessor
+		properties to distinguish them from data properties that have a simple value.
+
+			var o = {
+				// An ordinary data property
+				data_prop: value,
+				
+				// An accessor property defined as a pair of functions
+				get accessor_prop() { /* function body here */ },
+				set accessor_prop(value) { /* function body here */ }
+			};
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
 			
 			
 			
