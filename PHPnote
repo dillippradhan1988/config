@@ -1,0 +1,53 @@
+$this
+	The pseudo-variable $this is available inside any class method when that method is called from within an object context. $this is a reference to the calling object (usually the object to which the method belongs, but possibly another object, if the method is called statically from the context of a secondary object).
+
+Properties 
+	Class member variables are called "properties".
+
+constant
+	Note that class constants are allocated once per class, and not for each class instance.
+
+Autoloading Classes
+	The spl_autoload_register() function registers any number of autoloaders, enabling for classes and interfaces to be automatically loaded if they are currently not defined. By registering autoloaders, PHP is given a last chance to load the class or interface before it fails with an error.
+
+	Although the __autoload() function can also be used for autoloading classes and interfaces, it's preferred to use the spl_autoload_register() function. This is because it is a more flexible alternative (enabling for any number of autoloaders to be specified in the application, such as in third party libraries).
+
+	Autoloading is not available if using PHP in CLI
+
+Constructor
+	 Classes which have a constructor method call this method on each newly-created object, so it is suitable for any initialization that the object may need before it is used.
+
+	 Parent constructors are not called implicitly if the child class defines a constructor. In order to run a parent constructor, a call to parent::__construct() within the child constructor is required. 
+
+ 	Unlike with other methods, PHP will not generate an E_STRICT level error message when __construct() is overridden with different parameters than the parent __construct() method has.
+
+Destructor
+	The destructor method will be called as soon as there are no other references to a particular object, or in any order during the shutdown sequence.
+
+	Like constructors, parent destructors will not be called implicitly by the engine. In order to run a parent destructor, one would have to explicitly call parent::__destruct() in the destructor body. Also like constructors, a child class may inherit the parent's destructor if it does not implement one itself.
+
+	The destructor will be called even if script execution is stopped using exit(). Calling exit() in a destructor will prevent the remaining shutdown routines from executing.
+
+	Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.
+
+Visibility
+	Class properties must be defined as public, private, or protected. If declared using var, the property will be defined as public.
+
+	Class members declared public can be accessed everywhere. 
+
+	Members declared protected can be accessed only within the class itself and by inheriting classes.
+
+	Members declared as private may only be accessed by the class that defines the member.
+
+	Property Visibility
+		Class properties must be defined as public, private, or protected. If declared using var, the property will be defined as public.
+
+	Method Visibility
+		Class methods may be defined as public, private, or protected. Methods declared without any explicit visibility keyword are defined as public.
+
+	Constant Visibility
+		As of PHP 7.1.0, class constants may be defined as public, private, or protected. Constants declared without any explicit visibility keyword are defined as public.
+
+	Visibility from other objects
+		Objects of the same type will have access to each others private and protected members even though they are not the same instances. This is because the implementation specific details are already known when inside those objects.
+
