@@ -91,4 +91,34 @@ Visibility
 		Constants
 			 Interface constants works exactly like class constants except they cannot be overridden by a class/interface that inherits them
 
-		
+	 Traits
+	 	Traits are a mechanism for code reuse in single inheritance
+
+	 	A Trait is intended to reduce some limitations of single inheritance by enabling a developer to reuse sets of methods freely in several independent classes living in different class hierarchies.
+
+	 	It is not possible to instantiate a Trait on its own. 
+
+	 	Precedence
+	 		An inherited member from a base class is overridden by a member inserted by a Trait. The precedence order is that members from the current class override Trait methods, which in turn override inherited methods.
+
+	 	Conflict Resolution
+	 		If two Traits insert a method with the same name, a fatal error is produced, if the conflict is not explicitly resolved.
+
+	Anonymous classes 
+		Support for anonymous classes was added in PHP 7. 
+
+	Overloading
+		Overloading in PHP provides means to dynamically "create" properties and methods. These dynamic entities are processed via magic methods one can establish in a class for various action types.
+
+		All overloading methods must be defined as public.
+
+	Object Iteration
+		PHP 5 provides a way for objects to be defined so it is possible to iterate through a list of items, with, for example a foreach statement. By default, all visible properties will be used for the iteration.
+
+	Magic Methods
+		The function names __construct(), __destruct(), __call(), __callStatic(), __get(), __set(), __isset(), __unset(), __sleep(), __wakeup(), __toString(), __invoke(), __set_state(), __clone() and __debugInfo() are magical in PHP classes. 
+
+	Final Keyword
+		PHP 5 introduces the final keyword, which prevents child classes from overriding a method by prefixing the definition with final. If the class itself is being defined final then it cannot be extended.
+
+		Properties cannot be declared final, only classes and methods may be declared as final.
