@@ -272,35 +272,14 @@ To install the package, you?ll use the dpkg utility, which is the internal packa
 
 Netbean Installation
 ---------------------
-Step 1: Install JAVA
-	$ sudo add-apt-repository ppa:webupd8team/java
-	$ sudo apt-get update
-	$ sudo apt-get install oracle-java8-installer
-	After installing verify Java installed successfully on your system.
+	chmod +x netbeans-8.2-linux.sh
+	./netbeans-8.2-linux.sh
 
-	$ java -version
-		java version "1.8.0_60"
-		
-Step 2: Install Java(TM) SE Runtime Environment
-
-Java(TM) SE Runtime Environment (build 1.8.0_60-b27)
-Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)
-Step 2: Download NetBeans (PHP) Installer
-
-After installing/verifying java on your system, download NetBeans for PHP latest installer file, For following commands, we are running as root user.
-
-$ sudo su -
-# wget http://download.netbeans.org/netbeans/8.0.2/final/bundles/netbeans-8.0.2-php-linux.sh
-You can download full version of NetBeans from official website or using this link. After complete download of installer file, make file executable and run it.
-
-# chmod +x netbeans-8.0.2-php-linux.sh
-# sh netbeans-8.0.2-php-linux.sh
-Currently (27/Aug/2015) NetBeans 8.0.2 version is available to install, For more recent versions, visit https://netbeans.org/ official site.
-
-send, or push, data to the client without the client first making a request.
+	chmod +x jdk-8u121-nb-8_2-linux-x64.sh
+	./jdk-8u121-nb-8_2-linux-x64.sh
 
 
 Cloud 9
 ---------
-dillip9090
-*ei7676Iq#
+	dillip9090
+	*ei7676Iq#
