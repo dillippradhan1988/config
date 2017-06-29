@@ -1,0 +1,74 @@
+docker run -d -v /var/www:/var/www dillip9090/ubuntu16
+
+docker rm $(docker ps -a -q)
+
+docker rmi $(docker images -q)
+
+
+Build docker from Dockerfile
+    docker build /home/dillip/dckr -t ubuntu16
+
+List all docker images
+    docker images -a
+
+List all docker container
+    docker ps -a
+
+Run container in docker
+    docker run -it ubuntu16
+
+    docker run -p 80:80 -it dillip9090/ubuntu16
+
+    docker run -p 80:80 -it --volumes-from html_root_path dillip9090/ubuntu16
+
+Commit changes in docker images
+    docker commit 0a773a436d1e ubuntu16
+
+Tagging images
+    docker tag ubuntu_installation_by_docker john/get-started:part1
+
+Rename
+    docker image tag ubuntu_installation_by_docker dillip9090/ubuntu_installation_by_docker
+
+Login
+    docker login -u dillip9090
+
+Push
+    docker push dillip9090/ubuntu16
+
+Pull
+    docker pull dillip9090/ubuntu16
+
+Network list
+    docker network ls
+
+Inspect specified network
+    docker network inspect bridge
+
+Run custom container in network
+    docker run -itd --name=networktest dillip9090/ubuntu16
+
+Disconnect custom container from network
+    docker network disconnect bridge networktest
+
+Create custom network of bridge type
+    docker network create -d bridge my_bridge
+
+Add containers to a network
+    docker run -d --net=my_bridge --name dillip9090/ubuntu16
+
+
+
+docker create -v /var/www/html:/var/www/html --name html_root_path dillip9090/ubuntu16
+
+docker run -p 80:80 -it --volumes-from html_root_path dillip9090/ubuntu16
+
+
+docker volume create html_root_path
+
+docker volume ls
+
+
+html_root_path
+
+
