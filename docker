@@ -22,7 +22,7 @@ Run container in docker
     docker run -p 80:80 -it --volumes-from html_root_path dillip9090/ubuntu16
 
 Commit changes in docker images
-    docker commit 0a773a436d1e ubuntu16
+    docker commit 73067f5115f7 dillip9090/ubuntu16:latest
 
 Tagging images
     docker tag ubuntu_installation_by_docker john/get-started:part1
