@@ -1,9 +1,3 @@
-https://www.tcsion.com/dotcom/TCSSMB/Login/login.html
-
-http://synergy.tnq.co.in
-
-http://wiki.tnq.co.in/index.php/Standards/Php
-
 https://experiencehq.net/articles/how-and-when-to-use-psr-4-autoloading-in-your-craft-plugins
 
 https://mattstauffer.co/blog/a-brief-introduction-to-php-namespacing
