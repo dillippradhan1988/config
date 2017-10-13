@@ -1,3 +1,35 @@
+Sand clock icon Glass timer symbol
+rwxr-xr-x
+111101101
+
+000=0       100=4
+001=1       101=5
+010=2       110=6
+011=3       111=7
+
+755
+
+
+  git clone http://git.tnq.co.in/submission-central/sc-component-integrator.git
+  cd sc-component-integrator/
+  git status
+  git checkout submission-experiment-implementation
+
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 40M
+
+; Must be greater than or equal to upload_max_filesize
+post_max_size = 40M
+
+JASN 2016020248
+docker exec -it WEB-OUT-UI-2 /bin/bash
+rm /etc/apache2/sites-enabled/000-default.conf
+service apache2 reload
+
+apt-get install -y docker.io
+
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+
 docker run -d -v /var/www:/var/www dillip9090/ubuntu16
 
 docker rm $(docker ps -a -q)
@@ -6,7 +38,7 @@ docker rmi $(docker images -q)
 
 
 Build docker from Dockerfile
-    docker build /home/dillip/dckr -t ubuntu16
+    docker build -t dillip9090/ubuntu16:latest /home/dillip/dckr
 
 List all docker images
     docker images -a
@@ -22,7 +54,7 @@ Run container in docker
     docker run -p 80:80 -it --volumes-from html_root_path dillip9090/ubuntu16
 
 Commit changes in docker images
-    docker commit 73067f5115f7 dillip9090/ubuntu16:latest
+    docker commit 7281141c0e1f dillip9090/ubuntu16:latest
 
 Tagging images
     docker tag ubuntu_installation_by_docker john/get-started:part1
@@ -57,11 +89,13 @@ Create custom network of bridge type
 Add containers to a network
     docker run -d --net=my_bridge --name dillip9090/ubuntu16
 
+Run Container
+    docker start -i container_id
+docker run -p 8080:80 -it --volumes-from alpine_html_root_path alpinejava:latest
+docker create -v /var/www/html:/var/www/html --name html_root_path dillip9090/ubuntu16:latest
+docker create -v /home/dillip/regression_test_suite:/home/regression_test_suite --name test_suite_path dillip9090/ubuntu16:latest
 
-
-docker create -v /var/www/html:/var/www/html --name html_root_path dillip9090/ubuntu16
-
-docker run -p 80:80 -it --volumes-from html_root_path dillip9090/ubuntu16
+docker run -p 80:80 -it --volumes-from html_root_path  --volumes-from test_suite_path dillip9090/ubuntu16:latest
 
 
 docker volume create html_root_path
@@ -71,4 +105,46 @@ docker volume ls
 
 html_root_path
 
+To change your user password:
+    sudo passwd
 
+To change your user password:
+    passwd
+
+To change other users password:
+    sudo passwd USERNAME
+gedit .bashrc
+sudo supervisorctl stop proofcentral_out-cli_pc_sjs:*
+sudo supervisorctl start proofcentral_out-cli_pc_sjs:*
+sudo supervisorctl status
+sudo supervisorctl stop proofcentral_out-api_pc_sjs:out-api_pc_sjs_00
+sudo supervisorctl start proofcentral_out-api_pc_sjs:out-api_pc_sjs_00
+
+/etc/supervisor/conf.d/
+
+tailf /var/log/supervisor/out-cli-worker_pc_sjs_00.log
+
+
+
+java -version
+echo $JAVA_HOME
+echo $JRE_HOME
+
+tar -zxvf
+
+cat /etc/alpine-release
+apk add openrc --no-cache
+ rc-service apache2 restart
+
+ httpd -k start
+export JRE_HOME=/opt/jdk/jre
+
+dpkg -l | grep pkg-config
+
+apt-get update --fix-missing
+
+8106f1c6ae464a42a7ae2897d4b8f2ff
+java -jar jenkins.war --httpPort=8080
+dpkg -L jenkins
+
+docker run  --rm  -u root  -p 8586:8586 -p 8080:8080 -it -v jenkins-data:/var/jenkins_home -v /home/dillip/GitHub:/var/www/localhost/htdocs -v /var/run/docker.sock:/var/run/docker.sock  -v "$HOME":/home  alpinejava:latest
