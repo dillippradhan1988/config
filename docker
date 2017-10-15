@@ -148,3 +148,59 @@ java -jar jenkins.war --httpPort=8080
 dpkg -L jenkins
 
 docker run  --rm  -u root  -p 8586:8586 -p 8080:8080 -it -v jenkins-data:/var/jenkins_home -v /home/dillip/GitHub:/var/www/localhost/htdocs -v /var/run/docker.sock:/var/run/docker.sock  -v "$HOME":/home  alpinejava:latest
+
+docker inspect  -f "{{.Name}} {{.Config.Cmd}}"
+docker ps --no-trunc
+
+docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d myjenkins
+
+docker exec jenkins-master tail -f /var/log/jenkins/jenkins.log
+
+docker run -p 8080:8080 -p 50000:50000 -it --name=jenkins-master -v jenkins-log:/var/log/jenkins -v jenkins-home:/var/jenkins_home -v jenkins-cache:/var/cache/jenkins/war  myjenkins
+
+
+docker run -p 8080:8080 -p 8586:80 -it --name=prod_jenkins_master -v prod_jenkins_log:/var/log/jenkins -v prodenkins_home:/var/jenkins_home -v prod_jenkins_cache:/var/cache/jenkins -v /home/dillip/jenkinsci_prod:/var/www/localhost/htdocs jenkin_alpine_java_php_apache
+
+
+
+
+
+git@github.com:dillippradhan1988/jenkinsci.git/
+
+docker exec -it dev_jenkins_master /bin/bash
+docker exec -it prod_jenkins_master /bin/sh
+
+sudo iptables -I DOCKER -j ACCEPT
+
+stat 
+stat -c %a 
+
+cut -d: -f1 /etc/passwd
+
+apk add openrc openssh alpine-sdk
+rc-update add sshd
+
+sudo passwd
+passwd
+sudo passwd USERNAME
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -L -n
+
+su dillip
+echo $USER
+sudo passwd dillip
+
+docker run -p 8585:80 -it --name=dev_jenkins_master -v /home/dillip/jenkinsci_client:/var/www/localhost/htdocs alpine_java_php_apache
+
+docker run -p 8080:8080 -p 8586:80 -it --name=prod_jenkins_master --user="root" -e JENKINS_OPTS="--handlerCountStartup=100 --handlerCountMax=300 --logfile=/var/log/jenkins/jenkins.log" -v prod_jenkins_log:/var/log/jenkins -v prod_jenkins_home:/var/jenkins_home -v prod_jenkins_cache:/var/cache/jenkins -v /home/dillip/jenkinsci_prod:/var/www/localhost/htdocs jenkin_alpine_java_php_apache
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4r+eAx2Z1Vki1T6/H4lsDqlVE0lCPzwbo/X3dORzG+/UXnciIE3YsD02xgNO0ve9Z7MgpvThX1Ag3RdHyxEEphETvWagiFZgeP9kjuUUKZpzMPmun4BBdEZMoXLmfb9/2nqwzyzbgBuhLYigtDF1c4DlOPMJYIc6JPn+u84LRnXVbH5cDqfW6TrWfW8G8qpgZqRNi02KRPac7NF0h6i8IZQgMHk+bYuXj3hAaX0BitnMN663GsF+9Rvh/bSOd/x0mp3Wd/Yi4bFKdVdq5KYxW6rIMT3lESI9l21SobLfKtjNpfS3uiOlRaiLwam2aguy979n3f9Pi8ihrO51QbOs1 jenkins@a0f0da925ad2
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6GsSukdSVABSgHGvizmPLHW9iAVps18E04ic593/BNajWWk51UdFwxEHuAkeANe5GWJAOs0DUDtUJozf9ARY23ukA9qmFgQh0W46UTZDuvpOp4UOEEwKMI//0C0pvYS/86DCyfgCCtEP4u/bdZQ9ANcihdSxaTclVPDes8Jv45h8syo7D7C6zaf0LLR/ijH9i1M/ZeOwKTNSW6/z+cLcDo3wcZg9C/2Zmp2mak+8fSkK6LZBfuJMCebBlOegxTG9a9UCtVNspLbc5rEPCtsmeJ24iDhHwVEdY17AvVxwqWBIVYiZmPnbYwqmgv8ygitjqWeS3gC2y54+sHby/53in jenkins@c69ec559a84e
+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgxk1zFR/ATEYJ2sD/RkqL/5O0/NeoDe4RdL0FqOrgtHue11ip/wnIsh6V133RHH1EUfSTMZ2aCLG2Vk0y4GrGC2xl2biDiyRr0vw+2HHU3TlL/hXtX5HpnskPLwVhBzAo6kg09I6mncIXW5vMpeXi+vc47Q6GZO20eUwUQfN9pZ5i+4b7tcv+t+3ZB8yn5up1fD5nF8ZO0YGfg2WjjxmsGot654dOHydVpRNBauFJtyoxHc0ihtk2MqDvR4hfolhGPQVqCzsVOPr3q3eEB4qQYluorOebByblEOEsQWvJmT4FOOWKrhwDAiunjj1hV678MP8vzU2O90PWjA+yH1EN root@c69ec559a84e
+
+
+ENV JENKINS_OPTS="--logfile=/var/log/jenkins/jenkins.log"
