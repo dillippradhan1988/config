@@ -1,0 +1,39 @@
+1. checkout
+
+2. php {source folder}
+    if it failes, fail the build with email and build report
+
+3. jslint {source folder}
+    if it failes, fail the build with email and build report
+
+4. Check quality of code with SonarQube
+    Quality gate - fail build of less than quality gate
+
+5. run php unit/codeception
+    if it failes, fail the build with email and build report
+
+6. api functional test
+    POSTMAN
+    NEWMAN abcd.json
+    if it failes, fail the build with email and build report
+
+7. Run regression test suite (.jar xx yyy)
+    if it failes, fail the build with email and build report
+
+If all tests passes
+8. Change necessary configs of the application. sed & awk
+9. Copy PHP sources to designate server directories
+
+Additionally
+==========
+Job for DB setup
+Deployment conversion component
+
+
+test cases folder
+=========
+src root
+    |- tests
+        |- unit_tests
+        |- api_tests
+        |- regression_tests
