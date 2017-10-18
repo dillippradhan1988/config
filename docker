@@ -249,3 +249,4 @@ ssh -t -t root@172.17.0.2 <<EOF
         exit 0
     fi
 EOF
+http://codeception.com/02-04-2015/setting-up-jenkins-with-codeception.html
