@@ -230,3 +230,22 @@ export JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
 
 https://hub.docker.com/r/daicho/alpine-jenkins/~/dockerfile/
 https://github.com/SonarSource/docker-sonarqube/blob/c6aa0bbe967999f37cfa64522b3ae6ff0fda04de/6.5-alpine/Dockerfile
+
+#!/bin/sh
+ssh -t -t root@172.17.0.2 <<EOF 
+    cd /var/www/localhost/htdocs/jenkinsci
+    #git pull origin master    
+    touch phpError.txt
+    find . -name \*.php -exec php -l {} \; | grep -v 'No syntax errors' > phpError.txt
+    noOfLine=$(wc -l < phpError.txt)                                             
+   
+    echo $noOfLine
+    if [ $? -eq 1 && $noOfLine -gt 0]
+    then
+        echo "Unable to build."
+        exit 1
+    else
+        echo "Successfully built."
+        exit 0
+    fi
+EOF
