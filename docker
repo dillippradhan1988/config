@@ -220,3 +220,13 @@ o69CBEYPbbJHvh5JcP_K
  java -Dmail.smtp.starttls.enable="true" -jar hudson.war
 
  /usr/local/bin/jenkins.sh
+ 
+ 
+ export JENKINS_VERSION=2.73.2 \
+export JENKINS_HOME=/var/jenkins_home \
+export JENKINS_UC=https://updates.jenkins.io \
+export JENKINS_SLAVE_AGENT_PORT=50000 \
+export JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
+
+https://hub.docker.com/r/daicho/alpine-jenkins/~/dockerfile/
+https://github.com/SonarSource/docker-sonarqube/blob/c6aa0bbe967999f37cfa64522b3ae6ff0fda04de/6.5-alpine/Dockerfile
