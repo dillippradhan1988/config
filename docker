@@ -252,3 +252,4 @@ ssh -t -t root@172.17.0.2 <<EOF
     fi
 EOF
 http://codeception.com/02-04-2015/setting-up-jenkins-with-codeception.html
+https://medium.com/@teeks99/continuous-integration-with-jenkins-and-gitlab-fa770c62e88a
