@@ -253,3 +253,27 @@ ssh -t -t root@172.17.0.2 <<EOF
 EOF
 http://codeception.com/02-04-2015/setting-up-jenkins-with-codeception.html
 https://medium.com/@teeks99/continuous-integration-with-jenkins-and-gitlab-fa770c62e88a
+
+php7-intl php7-openssl php7-tokenizer php7-dev php7-xmlrpc php7-xmlreader php7-xml php7-curl php7-phar php7-ctype php7-simplexml php7-mysqli php7-pdo_mysql
+
+    lighttpd php7-common php7-iconv php7-json php7-gd php7-pgsql php7-cgi php7-imap fcgi php7-pdo_pgsql php7-pdo php7-soap php7-xmlrpc php7-posix php7-gettext php7-ldap php7-pdo_mysql
+
+    docker run -it --name dev-mysql -e MYSQL_ROOT_PASSWORD=test1234 mysql
+
+    docker run -p 8585:80 -it --name=dev_jenkins_master --link dev-mysql:mysql -v /home/dillip/jenkinsci_client:/var/www/localhost/htdocs alpine_java_php_apache
+
+    docker run -it --name prodsonar -p 9000:9000 -p 9092:9092 -v sonar_home:/opt/sonarqube -v sonar_data:/opt/sonarqube/data sonarqube
+
+    docker run -it --name prod_alpine -p 8080:8080 -p 5555:80 -v /home/dillip/jenkinsci_prod:/var/www/localhost/htdocs -v /var/jenkins_home:/var/jenkins_home prodalpine
+
+    CREATE TABLE products (
+         id bigint NOT NULL AUTO_INCREMENT,
+         product_name varchar(255) NOT NULL,
+         created_at DATETIME,
+         updated_at DATETIME,
+         PRIMARY KEY (id)
+    );
+
+    apk add --update nodejs nodejs-npm
+
+    newman run Github\ API.postman_collection.json -e GITHUB_ENV.postman_environment.json
